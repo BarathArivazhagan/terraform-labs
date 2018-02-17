@@ -13,7 +13,7 @@ resource "aws_instance" "web-server" {
 }
 
 resource "aws_security_group" "default_allow_all_sg" {
-  name        = "allow_all"
+  name        = "default_allow_all_sg"
   description = "Allow all inbound traffic"
 
   ingress {

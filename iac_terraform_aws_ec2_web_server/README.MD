@@ -4,9 +4,10 @@ Terraform script to create a simple EC2 instance in AWS.
 
 ### Pre-requisites:
 
-* AWS account
-* EC2 instance with an IAM role (EC2FullAccess) attached # below terraform commands run from an EC2 instance to avoid security issues related to aws access key and secret
-* In case of AWS marketplace AMI, accept the license before running the terraform commands
+* <b> AWS account </b>
+* <b> EC2 instance with an IAM role </b> (EC2FullAccess) attached below terraform commands run from an EC2 instance to avoid security issues related to aws access key and secret
+* <b> Terraform package to be installed </b>
+* <b> In case of AWS marketplace AMI </b>, accept the license before running the terraform commands
 
 ### How to run the terraform script?
 

@@ -1,12 +1,12 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.aws_region}"
 }
 
 resource "aws_instance" "web-server" {
-  ami = "ami-4bf3d731"
-  instance_type = "t2.micro"
-  key_name = "barath_mac_pair"
-  
+  ami = "${var.ami}"
+  instance_type = "${var.instance_type}"
+  key_name = "${var.key_pair_name}"
+
   tags {
     Name = "web-server"
   }

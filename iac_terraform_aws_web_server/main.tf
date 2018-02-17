@@ -12,7 +12,7 @@ resource "aws_instance" "web-server" {
   }
 }
 
-resource "aws_security_group" "allow_all" {
+resource "aws_security_group" "default_allow_all_sg" {
   name        = "allow_all"
   description = "Allow all inbound traffic"
 

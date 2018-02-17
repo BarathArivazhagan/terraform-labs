@@ -22,7 +22,7 @@ $ terraform init
 
 ```
 
-* Plan the infrastructure using terraform plan
+* Plan the infrastructure using <b>terraform plan</b>
 
 ```
 $ terraform plan
@@ -41,10 +41,8 @@ Go to <b>terraform.tfvars</b> and modify the variables
 <b> Note </b>: By default terraform populates all the configuration properties
                from terraform.tfvars.
 
-
 ### How to destroy the infrastructure ?
 
 ```
 $ terraform destroy
-
 ```

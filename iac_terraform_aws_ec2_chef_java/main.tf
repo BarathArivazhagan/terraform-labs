@@ -20,7 +20,7 @@ resource "aws_instance" "web-server" {
     connection {
       type = "ssh"
       user = "centos"
-      private_key = "${var.chef_client_private_key}"
+      private_key = "${file(var.chef_client_private_key)}"
     }
   }
 }

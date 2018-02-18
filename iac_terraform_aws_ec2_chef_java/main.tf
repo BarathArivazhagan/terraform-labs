@@ -17,7 +17,11 @@ resource "aws_instance" "web-server" {
     user_key = "${file(var.chef_user_key_filepath)}"
     user_name = "${var.chef_user_name}"
     run_list = ["java"]
-    connection {}
+    connection {
+      type = "ssh"
+      user = "centos"
+      private_key = "${var.chef_client_private_key}"
+    }
   }
 }
 

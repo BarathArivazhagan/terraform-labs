@@ -35,3 +35,5 @@ variable "chef_user_name" {
 
 }
 variable "chef_server_url" {}
+
+variable "chef_client_private_key" {}

@@ -14,7 +14,7 @@ resource "aws_instance" "web-server" {
   provisioner "chef" {
     node_name = "${var.node_name}"
     server_url = "${var.chef_server_url}"
-    user_key = "${file(${var.chef_user_key_filepath})}"
+    user_key = "${file(var.chef_user_key_filepath)}"
     user_name = "${var.chef_user_name}"
     run_list = ["java"]
     connection {}

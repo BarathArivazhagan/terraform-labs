@@ -1,4 +1,4 @@
-# aws_ec2_web_server
+# iac_terraform_aws_ec2_web_server
 
 Terraform script to create a simple EC2 instance in AWS. 
 

@@ -24,3 +24,14 @@ variable "instance_tags" {
     Name = "web-server"
   }
 }
+
+variable "chef_user_key_filepath" {}
+
+variable "node_name" {
+  description = "node name to be associated with the instance in chef server"
+}
+
+variable "chef_user_name" {
+
+}
+variable "chef_server_url" {}

@@ -1,6 +1,6 @@
-# aws_ec2_web_server
+# iac_terraform_aws_ec2_chef_java
 
-Terraform script to create a simple EC2 instance in AWS. 
+Terraform script to create a simple EC2 instance with chef provisioner script to configure java in AWS.
 
 ### Pre-requisites:
 
@@ -18,7 +18,7 @@ git clone https://github.com/BarathArivazhagan/terraform_scripts.git
 * cd into the repository and run <b>terraform init</b> command
 
 ```
-$ cd terraform_scripts/iac_terraform_aws_ec2_web_server
+$ cd terraform_scripts/iac_terraform_aws_ec2_chef_java
 $ terraform init
 
 ```

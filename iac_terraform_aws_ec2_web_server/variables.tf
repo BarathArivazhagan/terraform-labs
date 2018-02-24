@@ -3,6 +3,16 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "vpc_id"{
+  description = "AWS VPC ID to be associated with the instance"
+  default = ""
+}
+
+variable "subnet_id" {
+  description = "subnet id within VPC network to be associated with the instance"
+  default = ""
+}
+
 variable "key_pair_name"{
   description = "key pair to be associated with the instance"
 }

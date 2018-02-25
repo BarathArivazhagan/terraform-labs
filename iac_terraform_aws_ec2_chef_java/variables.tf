@@ -52,3 +52,7 @@ variable "chef_run_list" {
   type = "list"
   description = "describe the run list to be executed in the chef node instance"
 }
+
+variable "chef_environment" {
+  description = "environmnet to pass for chef client run"
+}

@@ -33,7 +33,7 @@ resource "aws_instance" "web-server" {
 resource "aws_security_group" "default_allow_all_sg" {
   name        = "default_allow_all_sg"
   description = "Allow all inbound traffic"
-
+  vpc_id = "${var.vpc_id}"
   ingress {
     from_port   = 0
     to_port     = 0

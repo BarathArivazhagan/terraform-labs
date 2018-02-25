@@ -1,5 +1,6 @@
 provider "aws" {
   region = "${var.aws_region}"
+
 }
 
 resource "aws_instance" "web-server" {
@@ -7,6 +8,7 @@ resource "aws_instance" "web-server" {
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"
   security_groups = ["${aws_security_group.default_allow_all_sg.name}"]
+  subnet_id = "${var.subnet_id}"
   tags {
     Name = "web-server"
   }

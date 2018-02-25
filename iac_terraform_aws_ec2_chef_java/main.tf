@@ -17,6 +17,7 @@ resource "aws_instance" "web-server" {
     user_key = "${file(var.chef_user_key_filepath)}"
     user_name = "${var.chef_user_name}"
     run_list = "${var.chef_run_list}"
+    environment = "${var.chef_environment}"
     recreate_client = true
 
     connection {

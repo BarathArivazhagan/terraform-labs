@@ -3,6 +3,17 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "aws_access_key" {
+  description = "AWS access key to access AWS resources"
+  default = "" # Not recommended to use access key as it leads to secutiry issues
+}
+
+
+variable "aws_secret_key" {
+  description = "AWS secret key to access AWS resources"
+  default = "" # Not recommended to use secret key as it leads to secutiry issues
+}
+
 variable "vpc_id"{
   description = "AWS VPC ID to be associated with the instance"
   default = ""
@@ -33,4 +44,8 @@ variable "instance_tags" {
    default = {
     Name = "web-server"
   }
+}
+
+variable "name" {
+  type = "list"
 }

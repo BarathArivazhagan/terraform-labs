@@ -9,7 +9,7 @@ resource "aws_instance" "web-server" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"
-  security_groups = ["${aws_security_group.default_allow_all_sg.name}"]
+  vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
   subnet_id="${var.subnet_id}"
   tags {
     Name = "web-server"

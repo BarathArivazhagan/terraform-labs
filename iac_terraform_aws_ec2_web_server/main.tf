@@ -7,12 +7,12 @@ provider "aws" {
 
 resource "aws_instance" "web-server" {
   ami = "${var.ami}"
-  instance_type = "${var.name}"
-  key_name = "${var.name}"
+  instance_type = "${var.instance_type}"
+  key_name = "${var.key_pair_name}"
   security_groups = ["${aws_security_group.default_allow_all_sg.name}"]
   subnet_id="${var.subnet_id}"
   tags {
-    Name = "${var.name}"
+    Name = "web-server"
   }
 
 
@@ -23,6 +23,7 @@ resource "aws_security_group" "default_allow_all_sg" {
   name        = "default_allow_all_sg"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
+
   ingress {
     from_port   = 0
     to_port     = 0
@@ -38,6 +39,6 @@ resource "aws_security_group" "default_allow_all_sg" {
   }
 
   tags {
-    Name = "allow_all"
+    Name = "default_allow_all_sg"
   }
 }

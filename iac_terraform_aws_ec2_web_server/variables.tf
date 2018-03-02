@@ -16,12 +16,12 @@ variable "aws_secret_key" {
 
 variable "vpc_id"{
   description = "AWS VPC ID to be associated with the instance"
-  default = ""
+  default = "" # let terraform compute the default vpc id to be used
 }
 
 variable "subnet_id" {
   description = "subnet id within VPC network to be associated with the instance"
-  default = ""
+  default = "" # let terraform compute the default subnet id to be used
 }
 
 variable "key_pair_name"{

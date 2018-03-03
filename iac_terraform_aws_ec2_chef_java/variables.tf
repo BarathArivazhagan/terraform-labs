@@ -58,10 +58,12 @@ variable "chef_user_name" {
 }
 variable "chef_server_url" {
 
-
+   description = "chef server url "
 }
 
-variable "chef_client_private_key" {}
+variable "chef_client_private_key" {
+  description = "chef client/chef node instance key pair to login in to the instance using ssh"
+}
 
 variable "chef_run_list" {
   type = "list"

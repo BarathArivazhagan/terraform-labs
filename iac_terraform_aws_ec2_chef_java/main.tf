@@ -17,7 +17,7 @@ resource "aws_instance" "web-server" {
   tags {
     Name = "web-server"
   }
-
+  # chef provisioner configuration
   provisioner "chef" {
     node_name = "${var.node_name}"
     server_url = "${var.chef_server_url}"
@@ -29,7 +29,7 @@ resource "aws_instance" "web-server" {
 
     connection {
       type = "ssh"
-      user = "centos"
+      user = "${var.ssh_connection_user}"
       private_key = "${file(var.chef_client_private_key)}"
     }
   }

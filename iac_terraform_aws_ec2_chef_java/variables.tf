@@ -6,13 +6,13 @@ variable "aws_region" {
 
 variable "aws_access_key" {
   description = "AWS access key to access AWS resources"
-  default = "" # Not recommended to use access key as it leads to secutiry issues
+  default = "" # Not recommended to use access key as it leads to security issues
 }
 
 
 variable "aws_secret_key" {
   description = "AWS secret key to access AWS resources"
-  default = "" # Not recommended to use secret key as it leads to secutiry issues
+  default = "" # Not recommended to use secret key as it leads to security issues
 }
 
 variable "vpc_id"{
@@ -37,7 +37,7 @@ variable "instance_type" {
 
 variable "ami" {
   description = "ami to be associated with the instance"
-  default = "ami-97785bed" # use amazon linux ami as default Amazon Linux AMI 2017.09.1 (HVM), SSD Volume Type
+  default = "ami-97785bed" # use amazon linux ami as default (Amazon Linux AMI 2017.09.1 (HVM), SSD Volume Type)
 }
 
 variable "instance_tags" {
@@ -54,9 +54,12 @@ variable "node_name" {
 }
 
 variable "chef_user_name" {
+   description = "chef server user name "
+}
+variable "chef_server_url" {
+
 
 }
-variable "chef_server_url" {}
 
 variable "chef_client_private_key" {}
 
@@ -67,4 +70,8 @@ variable "chef_run_list" {
 
 variable "chef_environment" {
   description = "environmnet to pass for chef client run"
+}
+
+variable "ssh_connection_user" {
+  description = "ssh connection user name to login to the chef node/chef client instance"
 }

@@ -9,3 +9,4 @@ chef_server_url = "https://api.chef.io/organizations/barath-chef"
 chef_client_private_key="/home/ec2-user/barath_mac_pair.pem"
 chef_run_list=["role[java_oracle]"]
 chef_environment="ec2_java"
+ssh_connection_user="centos"

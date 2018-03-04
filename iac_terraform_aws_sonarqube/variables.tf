@@ -96,3 +96,5 @@ variable "db_allocated_storage" {}
 variable "rds_db_security_group_name" {}
 
 variable "db_subnet_group_name" {}
+
+variable "db_engine_version" {}

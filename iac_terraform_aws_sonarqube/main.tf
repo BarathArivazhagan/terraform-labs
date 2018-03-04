@@ -15,7 +15,7 @@ resource "aws_db_instance" "sonarqube-db" {
   db_subnet_group_name = "${var.db_subnet_group_name}"
   allocated_storage = "${var.db_allocated_storage}"
   engine = "mysql"
-  engine_version       = "5.6.17"
+  engine_version       = "${var.db_engine_version}"
   parameter_group_name = "default.mysql5.6"
   username = "${var.sonar_master_username}"
   password = "${var.sonar_master_password}"

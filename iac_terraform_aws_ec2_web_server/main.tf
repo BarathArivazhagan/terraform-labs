@@ -16,7 +16,6 @@ resource "aws_instance" "web-server" {
   }
 
 
-
 }
 
 resource "aws_security_group" "default_allow_all_sg" {

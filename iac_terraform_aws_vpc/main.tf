@@ -95,5 +95,5 @@ resource "aws_route_table_association" "private_subnet_1a_association" {
 
   subnet_id = "${aws_subnet.client-private-subnet-1a.id}"
   route_table_id = "${aws_route_table.client-private-route-table.id}"
-  
+
 }

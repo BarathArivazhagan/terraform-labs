@@ -26,12 +26,12 @@ module "ecr"{
 resource "aws_security_group" "alb_sg" {
   name        = "tf-ecs-alb"
   description = "controls access to the ALB"
-  vpc_id      = "${module.vpc.}"
+  vpc_id      = "${module.vpc.vpc_id}"
 
   ingress {
     protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 0
+    to_port     = 65535
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -43,17 +43,16 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# Traffic to the ECS Cluster should only come from the ALB
-resource "aws_security_group" "ecs_tasks" {
+resource "aws_security_group" "ecs_task_sg" {
   name        = "tf-ecs-tasks"
   description = "allow inbound access from the ALB only"
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${module.vpc.vpc_id}"
 
   ingress {
     protocol        = "tcp"
-    from_port       = "${var.app_port}"
-    to_port         = "${var.app_port}"
-    security_groups = ["${aws_security_group.lb.id}"]
+    from_port       = 0
+    to_port         = 65535
+    security_groups = ["${aws_security_group.alb_sg.id}"]
   }
 
   egress {
@@ -64,25 +63,23 @@ resource "aws_security_group" "ecs_tasks" {
   }
 }
 
-### ALB
 
-resource "aws_alb" "main" {
+resource "aws_alb" "alb" {
   name            = "tf-ecs-chat"
-  subnets         = ["${aws_subnet.public.*.id}"]
-  security_groups = ["${aws_security_group.lb.id}"]
+  subnets         = ["${module.vpc.public_subnet_id}"]
+  security_groups = ["${aws_security_group.alb_sg.id}"]
 }
 
 resource "aws_alb_target_group" "app" {
   name        = "tf-ecs-chat"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = "${aws_vpc.main.id}"
+  vpc_id      = "${module.vpc.vpc_id}"
   target_type = "ip"
 }
 
-# Redirect all traffic from the ALB to the target group
 resource "aws_alb_listener" "front_end" {
-  load_balancer_arn = "${aws_alb.main.id}"
+  load_balancer_arn = "${aws_alb.alb.id}"
   port              = "80"
   protocol          = "HTTP"
 
@@ -130,18 +127,18 @@ resource "aws_ecs_service" "ecs_service" {
   name            = "tf-ecs-service"
   cluster         = "${aws_ecs_cluster.ecs_cluster.id}"
   task_definition = "${aws_ecs_task_definition.app_definition.arn}"
-  desired_count   = "${var.app_count}"
+  desired_count   = "${var.task_count}"
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups = ["${aws_security_group.ecs_tasks.id}"]
-    subnets         = ["${aws_subnet.private.*.id}"]
+    security_groups = ["${aws_security_group.ecs_task_sg.id}"]
+    subnets         = ["${module.vpc.private_subnet_id}"]
   }
 
   load_balancer {
     target_group_arn = "${aws_alb_target_group.app.id}"
-    container_name   = "app"
-    container_port   = "${var.app_port}"
+    container_name   = "${var.container_name}"
+    container_port   = "${var.container_port}"
   }
 
   depends_on = [

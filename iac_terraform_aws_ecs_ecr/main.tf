@@ -25,6 +25,8 @@ module "ecs" {
   app_image = "${var.ecs_cluster_name}"
   host_port = "${var.host_port}"
   container_port = "${var.container_port}"
+  container_name = "${var.container_name}"
+  task_count = "${var.task_count}"
 
 
 

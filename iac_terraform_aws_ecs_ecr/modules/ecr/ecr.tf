@@ -88,19 +88,19 @@ data "aws_iam_policy_document" "resource" {
   }
 }
 
-resource "aws_ecr_repository" "default" {
+resource "aws_ecr_repository" "repository" {
   name = "${var.ecr_name}"
 }
 
 resource "aws_ecr_repository_policy" "default" {
   count      = "${signum(length(var.roles))}"
-  repository = "${aws_ecr_repository.default.name}"
+  repository = "${aws_ecr_repository.repository.name}"
   policy     = "${data.aws_iam_policy_document.resource.json}"
 }
 
 resource "aws_ecr_repository_policy" "default_ecr" {
   count      = "${signum(length(var.roles)) == 1 ? 0 : 1}"
-  repository = "${aws_ecr_repository.default.name}"
+  repository = "${aws_ecr_repository.repository.name}"
   policy     = "${data.aws_iam_policy_document.default_ecr.json}"
 }
 
@@ -135,7 +135,7 @@ resource "aws_iam_instance_profile" "default" {
 }
 
 resource "aws_ecr_lifecycle_policy" "default" {
-  repository = "${aws_ecr_repository.default.name}"
+  repository = "${aws_ecr_repository.repository.name}"
 
   policy = <<EOF
 {
@@ -154,4 +154,24 @@ resource "aws_ecr_lifecycle_policy" "default" {
   }]
 }
 EOF
+}
+
+data "template_file" "docker_build_template" {
+  template = "${file("../templates/docker_build.tpl")}"
+
+  vars {
+    ecr_repository_url = "${aws_ecr_repository.repository.repository_url}"
+    ecr_repository_name = "${aws_ecr_repository.repository.name}"
+  }
+}
+
+
+resource "null_resource" "docker_configuration" {
+
+
+  provisioner "file" {
+    destination = "/home/centos/docker_build"
+    source = "../templates/docker_build.tpl"
+  }
+
 }

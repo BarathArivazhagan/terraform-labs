@@ -76,3 +76,7 @@ variable "container_port" {}
 variable "host_port" {}
 
 variable "app_family_name" {}
+
+variable "container_name" {}
+
+variable "task_count" {}

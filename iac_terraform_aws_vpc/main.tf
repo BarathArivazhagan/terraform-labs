@@ -80,7 +80,7 @@ resource "aws_route_table" "client-private-route-table" {
   }
 
   tags {
-    Name = "client-public-route-table"
+    Name = "client-private-route-table"
   }
 
 }

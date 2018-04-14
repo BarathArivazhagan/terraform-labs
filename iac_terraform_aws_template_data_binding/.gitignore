@@ -14,3 +14,8 @@
 # Maven
 log/
 target/
+
+## Ignore terraform state files
+
+terraform.tfstate
+terraform.tfstate.backup

@@ -14,3 +14,12 @@ variable "aws_secret_key" {
   default = "" # Not recommended to use secret key as it leads to secutiry issues
 }
 
+variable "user" {
+
+  description = "user name to login through ssh connection type"
+}
+
+variable "private_key_path" {
+
+  description = "provide the path to private key to login to the instance"
+}

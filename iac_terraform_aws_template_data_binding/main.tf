@@ -6,7 +6,7 @@ provider "aws" {
 }
 
 data "template_file" "docker_build_template" {
-  template = "${file("../templates/docker_build.tpl")}"
+  template = "${file("./templates/docker_build.tpl")}"
 
   vars {
     ecr_repository_url = "docker-hub"
@@ -21,6 +21,14 @@ resource "null_resource" "docker_configuration" {
   provisioner "file" {
     destination = "/home/centos/docker_build"
     source = "../templates/docker_build.tpl"
+  }
+
+  connection {
+
+
+    type = "ssh"
+    user = "${var.user}"
+    private_key = "${var.private_key_path}"
   }
 
 }

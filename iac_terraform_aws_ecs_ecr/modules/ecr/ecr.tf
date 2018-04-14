@@ -154,7 +154,7 @@ EOF
 }
 
 data "template_file" "docker_build_template" {
-  template = "${var.template_source_path}"
+  template = "${path.module}/${var.template_source_path}"
 
   vars {
     ecr_repository_url = "${aws_ecr_repository.repository.repository_url}"

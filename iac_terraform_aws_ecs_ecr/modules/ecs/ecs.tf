@@ -105,7 +105,7 @@ resource "aws_ecs_task_definition" "app_definition" {
   cpu                      = "${var.fargate_cpu}"
   memory                   = "${var.fargate_memory}"
 
-  container_definitions = "${file("task-definitions/service.json")}"
+  container_definitions = "${file("${path.module}/task-definitions/service.json")}"
 
 }
 

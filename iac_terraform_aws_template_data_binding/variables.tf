@@ -29,6 +29,11 @@ variable "docker_repository_name" {
   description = "name of the docker repository"
 }
 
+variable "docker-repository_url" {
+
+  description = "url of the docker repository"
+}
+
 
 variable "template_source_path" {
 

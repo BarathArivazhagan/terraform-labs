@@ -26,11 +26,3 @@ variable "public_subnet_cidr_a" {
 variable "private_subnet_cidr_a" {
 
 }
-
-
-variable "private_client_aws_route_table" {
-
-}
-variable "public_client_aws_route_table" {
-
-}

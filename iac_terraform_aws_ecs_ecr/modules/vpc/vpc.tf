@@ -28,7 +28,7 @@ resource "aws_subnet" "public-subnet-1a" {
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "true"
   tags {
-    Name = "ecs-public-subnet-1a"
+    Name = "${var.vpc_name}-public-subnet-1a"
   }
 }
 
@@ -73,7 +73,7 @@ resource "aws_route_table" "ecs-private-route-table" {
   }
 
   tags {
-    Name = "ecs-private-route-table"
+    Name = "${var.vpc_name}-private-route-table"
   }
 
 }

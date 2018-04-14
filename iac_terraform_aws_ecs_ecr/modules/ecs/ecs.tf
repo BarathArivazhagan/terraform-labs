@@ -3,7 +3,6 @@
 module "vpc" {
   source = "../vpc"
 
-  environment                = "${var.environment}"
   aws_region                 = "${var.aws_region}"
   aws_internet_gateway_name  = "${var.aws_internet_gateway_name}"
   vpc_name                   = "${var.vpc_name}"
@@ -16,7 +15,6 @@ module "ecr"{
   source = "../ecr"
 
   environment               = "${var.environment}"
-  aws_region                = "${var.aws_region}"
   ecr_name                  = "${var.ecr_name}"
   max_image_count           = "${var.max_image_count}"
   user                      = "${var.user}"

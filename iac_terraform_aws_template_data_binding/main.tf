@@ -6,10 +6,10 @@ provider "aws" {
 }
 
 data "template_file" "docker_build_template" {
-  template = "${file("")}"
+  template = "${var.template_source_path}"
 
   vars {
-    ecr_repository_url = "docker.io"
+    ecr_repository_url = "${var.docker_repository_url}"
     ecr_repository_name = "${var.docker_repository_name}"
   }
 }
@@ -32,7 +32,7 @@ resource "null_resource" "docker_configuration" {
 
     type = "ssh"
     user = "${var.user}"
-    private_key = "${var.private_key_path}"
+    private_key = "${file(var.private_key_path)}"
   }
 
 }

@@ -6,11 +6,11 @@ provider "aws" {
 }
 
 data "template_file" "docker_build_template" {
-  template = "${file("./templates/docker_build.tpl")}"
+  template = "${file("")}"
 
   vars {
-    ecr_repository_url = "docker-hub"
-    ecr_repository_name = "dockerregistry"
+    ecr_repository_url = "docker.io"
+    ecr_repository_name = "${var.docker_repository_name}"
   }
 }
 
@@ -19,8 +19,12 @@ resource "null_resource" "docker_configuration" {
 
 
   provisioner "file" {
-    destination = "/home/centos/docker_build"
-    source = "../templates/docker_build.tpl"
+    destination = "${var.template_destination_path}"
+    content = "${data.template_file.docker_build_template.rendered}"
+  }
+
+  provisioner "local-exec" {
+    command = "sh ${var.template_destination_path}"
   }
 
   connection {

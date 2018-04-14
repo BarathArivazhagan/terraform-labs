@@ -23,3 +23,18 @@ variable "private_key_path" {
 
   description = "provide the path to private key to login to the instance"
 }
+
+variable "docker_repository_name" {
+
+  description = "name of the docker repository"
+}
+
+
+variable "template_source_path" {
+
+  description = "Source path to the template"
+}
+variable "template_destination_path" {
+
+  description = "Destination path to the rendered template"
+}

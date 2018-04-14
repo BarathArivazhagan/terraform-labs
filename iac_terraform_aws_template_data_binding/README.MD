@@ -1,6 +1,6 @@
-# iac_terraform_aws_ec2_web_server
+# iac_terraform_template_data_binding
 
-Terraform script to create a simple EC2 instance in AWS. 
+Terraform script to demonstrate data binding using template files
 
 ### Pre-requisites:
 

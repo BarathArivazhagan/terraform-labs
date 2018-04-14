@@ -93,3 +93,8 @@ variable "template_destination_path" {
 
   description = "Destination path to the rendered template"
 }
+
+variable "ecr_iam_role_name" {
+
+  description = "role name to be associated"
+}

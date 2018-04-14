@@ -1,6 +1,5 @@
 data "aws_iam_role" "ecr_iam_role" {
-   count = "${signum(length(var.roles)) == 1 ? length(var.roles) : 0}"
-   name  = "${element(var.roles, count.index)}"
+  name = "${var.ecr_iam_role_name}"
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -27,7 +26,6 @@ data "aws_iam_policy_document" "ecr_token_policy" {
 }
 
 data "aws_iam_policy_document" "default_ecr" {
-  count = "${signum(length(var.roles)) == 1 ? 0 : 1}"
 
   statement {
     sid    = "ecr"
@@ -58,7 +56,6 @@ data "aws_iam_policy_document" "default_ecr" {
 }
 
 data "aws_iam_policy_document" "resource" {
-  count = "${signum(length(var.roles))}"
 
   statement {
     sid    = "ecr"
@@ -93,13 +90,13 @@ resource "aws_ecr_repository" "repository" {
 }
 
 resource "aws_ecr_repository_policy" "default" {
-  count      = "${signum(length(var.roles))}"
+
   repository = "${aws_ecr_repository.repository.name}"
   policy     = "${data.aws_iam_policy_document.resource.json}"
 }
 
 resource "aws_ecr_repository_policy" "default_ecr" {
-  count      = "${signum(length(var.roles)) == 1 ? 0 : 1}"
+
   repository = "${aws_ecr_repository.repository.name}"
   policy     = "${data.aws_iam_policy_document.default_ecr.json}"
 }
@@ -111,25 +108,25 @@ resource "aws_iam_policy" "default" {
 }
 
 resource "aws_iam_role" "default" {
-  count              = "${signum(length(var.roles)) == 1 ? 0 : 1}"
+
   name               = "${var.ecr_name}"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "default_ecr" {
-  count      = "${signum(length(var.roles)) == 1 ? 0 : 1}"
+
   role       = "${aws_iam_role.default.name}"
   policy_arn = "${aws_iam_policy.default.arn}"
 }
 
 resource "aws_iam_role_policy_attachment" "default" {
-  count      = "${signum(length(var.roles)) == 1 ? length(var.roles) : 0}"
-  role       = "${element(var.roles, count.index)}"
+
   policy_arn = "${aws_iam_policy.default.arn}"
+  role = "${aws_iam_role.default.name}"
 }
 
 resource "aws_iam_instance_profile" "default" {
-  count = "${signum(length(var.roles)) == 1 ? 0 : 1}"
+
   name  = "${var.ecr_name}"
   role  = "${aws_iam_role.default.name}"
 }

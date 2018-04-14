@@ -31,4 +31,5 @@ module "ecs" {
   private_key_path = "${var.private_key_path}"
   template_source_path = "${var.template_source_path}"
   template_destination_path = "${var.template_destination_path}"
+  ecr_iam_role_name = "${var.ecr_iam_role_name}"
 }

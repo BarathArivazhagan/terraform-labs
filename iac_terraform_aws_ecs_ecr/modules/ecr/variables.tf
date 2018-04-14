@@ -8,12 +8,6 @@ variable "environment" {
   description = "envrionment name to be associated"
 }
 
-variable "roles" {
-  type        = "list"
-  description = "Principal IAM roles to provide with access to the ECR"
-  default     = ["ECR_ROLE"]
-}
-
 variable "delimiter" {
   type    = "string"
   default = "-"
@@ -52,4 +46,9 @@ variable "template_source_path" {
 variable "template_destination_path" {
 
   description = "Destination path to the rendered template"
+}
+
+variable "ecr_iam_role_name" {
+
+  description = "role name to be associated"
 }

@@ -80,3 +80,23 @@ variable "app_family_name" {}
 variable "container_name" {}
 
 variable "task_count" {}
+
+variable "user" {
+
+  description = "user name to login through ssh connection type"
+}
+
+variable "private_key_path" {
+
+  description = "provide the path to private key to login to the instance"
+}
+
+
+variable "template_source_path" {
+
+  description = "Source path to the template"
+}
+variable "template_destination_path" {
+
+  description = "Destination path to the rendered template"
+}

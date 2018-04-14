@@ -34,3 +34,22 @@ variable "max_image_count" {
   description = "How many Docker Image versions AWS ECR will store"
   default     = "7"
 }
+
+variable "user" {
+
+  description = "user name to login through ssh connection type"
+}
+
+variable "private_key_path" {
+
+  description = "provide the path to private key to login to the instance"
+}
+
+variable "template_source_path" {
+
+  description = "Source path to the template"
+}
+variable "template_destination_path" {
+
+  description = "Destination path to the rendered template"
+}

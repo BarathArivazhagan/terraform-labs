@@ -15,10 +15,14 @@ module "vpc" {
 module "ecr"{
   source = "../ecr"
 
-  environment          = "${var.environment}"
-  aws_region           = "${var.aws_region}"
-  ecr_name             = "${var.ecr_name}"
-  max_image_count      = "${var.max_image_count}"
+  environment               = "${var.environment}"
+  aws_region                = "${var.aws_region}"
+  ecr_name                  = "${var.ecr_name}"
+  max_image_count           = "${var.max_image_count}"
+  user                      = "${var.user}"
+  private_key_path          = "${var.private_key_path}"
+  template_source_path      = "${var.template_source_path}"
+  template_destination_path = "${var.template_destination_path}"
 
 }
 
@@ -141,7 +145,8 @@ resource "aws_ecs_service" "ecs_service" {
     container_port   = "${var.container_port}"
   }
 
+
   depends_on = [
-    "aws_alb_listener.front_end",
+    "aws_alb_listener.front_end","aws_ecs_cluster.ecs_cluster"
   ]
 }

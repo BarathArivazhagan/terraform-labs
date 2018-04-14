@@ -27,7 +27,8 @@ module "ecs" {
   container_port = "${var.container_port}"
   container_name = "${var.container_name}"
   task_count = "${var.task_count}"
-
-
-
+  user = "${var.user}"
+  private_key_path = "${var.private_key_path}"
+  template_source_path = "${var.template_source_path}"
+  template_destination_path = "${var.template_destination_path}"
 }

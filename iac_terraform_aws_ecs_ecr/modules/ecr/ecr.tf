@@ -157,7 +157,7 @@ EOF
 }
 
 data "template_file" "docker_build_template" {
-  template = "${file("../templates/docker_build.tpl")}"
+  template = "${var.template_source_path}"
 
   vars {
     ecr_repository_url = "${aws_ecr_repository.repository.repository_url}"
@@ -170,8 +170,20 @@ resource "null_resource" "docker_configuration" {
 
 
   provisioner "file" {
-    destination = "/home/centos/docker_build"
-    source = "../templates/docker_build.tpl"
+    destination = "${var.template_destination_path}"
+    content = "${data.template_file.docker_build_template.rendered}"
+  }
+
+  provisioner "local-exec" {
+    command = "sh ${var.template_destination_path}"
+  }
+
+  connection {
+
+
+    type = "ssh"
+    user = "${var.user}"
+    private_key = "${file(var.private_key_path)}"
   }
 
 }

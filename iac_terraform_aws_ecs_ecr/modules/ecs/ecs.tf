@@ -105,23 +105,8 @@ resource "aws_ecs_task_definition" "app_definition" {
   cpu                      = "${var.fargate_cpu}"
   memory                   = "${var.fargate_memory}"
 
-  container_definitions = <<DEFINITION
-[
-  {
-    "cpu": ${var.fargate_cpu},
-    "image": "${var.app_image}",
-    "memory": ${var.fargate_memory},
-    "name": "app",
-    "networkMode": "awsvpc",
-    "portMappings": [
-      {
-        "containerPort": ${var.container_port},
-        "hostPort": ${var.host_port}
-      }
-    ]
-  }
-]
-DEFINITION
+  container_definitions = "${file("task-definitions/service.json")}"
+
 }
 
 

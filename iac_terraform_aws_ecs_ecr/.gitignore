@@ -1,0 +1,22 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+.idea/workspace.xml
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+# Ignore terraform config and states
+
+.terraform
+terraform.tfstate
+terraform.tfstate.backup

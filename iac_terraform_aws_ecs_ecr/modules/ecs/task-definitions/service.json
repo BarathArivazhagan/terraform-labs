@@ -2,8 +2,8 @@
   {
     "name": "test-service",
     "image": "service-first",
-    "cpu": 10,
-    "memory": 512,
+    "cpu": 512,
+    "memory": 1024,
     "essential": true,
     "portMappings": [
       {

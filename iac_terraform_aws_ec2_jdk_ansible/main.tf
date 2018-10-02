@@ -13,7 +13,7 @@ resource "aws_instance" "ec2-instance" {
   vpc_security_group_ids = ["${aws_security_group.ec2_default_allow_all_sg.id}"]
   subnet_id = "${var.subnet_id}"
   tags {
-    Name = "web-server"
+    Name = "ec2-ansible-jdk"
   }
 
 //  provisioner "file" {

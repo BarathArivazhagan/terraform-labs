@@ -1,8 +1,15 @@
 variable "aws_region" {}
 
-variable "aws_access_key" {}
+variable "aws_access_key" {
+  description = "AWS access key to access AWS resources"
+  default = "" # Not recommended to use access key as it leads to security issues
+}
 
-variable "aws_secret_key" {}
+
+variable "aws_secret_key" {
+  description = "AWS secret key to access AWS resources"
+  default = "" # Not recommended to use secret key as it leads to security issues
+}
 
 variable "vpc_id" {}
 

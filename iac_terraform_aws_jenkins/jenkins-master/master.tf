@@ -31,7 +31,7 @@ resource "null_resource" "jenkins_remote_provisioner" {
 
 
   provisioner "remote-exec" {
-    inline = ["chmod +x /opt/script.sh","/opt/script.sh"]
+    inline = ["sudo chmod +x /opt/script.sh","/opt/script.sh"]
 
 
     connection {

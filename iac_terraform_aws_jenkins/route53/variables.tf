@@ -7,6 +7,6 @@ variable "hosted_zone_id" {
 variable master_record_name {}
 
 
-variable elb_dns_name {}
+variable lb_dns_name {}
 
-variable elb_zone_id {}
+variable lb_zone_id {}

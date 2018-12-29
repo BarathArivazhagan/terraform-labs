@@ -46,8 +46,8 @@ module "jenkins_route53" {
 
   hosted_zone_id = "${var.dns_zone_id}"
   master_record_name    = "${var.master_record_name}"
-  elb_dns_name   = "${module.jenkins_master.master_elb_dns}"
-  elb_zone_id    = "${module.jenkins_master.master_elb_zoneid}"
+  elb_dns_name   = "${module.jenkins_master.master_lb_dns}"
+  elb_zone_id    = "${module.jenkins_master.master_lb_zoneid}"
 }
 
 

@@ -32,7 +32,7 @@ resource "null_resource" "jenkins_remote_provisioner" {
       host        = "${aws_instance.jenkins_master_instance.public_ip}"
       type        = "ssh"
       user        = "fedora"
-      private_key = "${var.ssh_key_private}"
+      private_key = "${file("./artifacts/jenkins.pem")}"
     }
   }
 

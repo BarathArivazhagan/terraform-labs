@@ -15,7 +15,7 @@ resource "aws_instance" "jenkins_master_instance" {
   key_name = "${var.key_pair_name}"
   provisioner "file" {
     source      = "./artifacts/jenkins_master_script.sh"
-    destination = "/opt/script.sh"
+    destination = "/home/ec2-user/script.sh"
 
     connection {
       host        = "${aws_instance.jenkins_master_instance.public_ip}"
@@ -38,7 +38,7 @@ resource "null_resource" "jenkins_remote_provisioner" {
 
 
   provisioner "remote-exec" {
-    inline = ["sudo chmod +x /opt/script.sh","/opt/script.sh"]
+    inline = ["sudo chmod +x /home/ec2-user/script.sh","/home/ec2-user/script.sh"]
 
 
     connection {

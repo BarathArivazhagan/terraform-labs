@@ -31,7 +31,7 @@ resource "null_resource" "jenkins_remote_provisioner" {
     connection {
       host        = "${aws_instance.jenkins_master_instance.public_ip}"
       type        = "ssh"
-      user        = "fedora"
+      user        = "ec2-user"
       private_key = "${file("./artifacts/jenkins.pem")}"
     }
   }

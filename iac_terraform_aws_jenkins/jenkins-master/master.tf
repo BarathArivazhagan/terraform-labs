@@ -13,6 +13,10 @@ resource "aws_instance" "jenkins_master_instance" {
     Name          = "jenkins-master-instance"
   }
   key_name = "${var.key_pair_name}"
+  provisioner "file" {
+    source      = "./artifacts/jenkins_master_script.sh"
+    destination = "/opt/script.sh"
+  }
 }
 
 output "private_ip" {
@@ -25,10 +29,6 @@ output "instance_id" {
 
 resource "null_resource" "jenkins_remote_provisioner" {
 
-  provisioner "file" {
-    source      = "artifacts/jenkins_master_script.sh"
-    destination = "/opt/script.sh"
-  }
 
   provisioner "remote-exec" {
     inline = ["chmod +x /opt/script.sh","/opt/script.sh"]
@@ -47,7 +47,6 @@ resource "null_resource" "jenkins_remote_provisioner" {
 resource "aws_lb" "jenkins_master_lb" {
   name = "${var.master_lb_name}"
   load_balancer_type = "network"
-  security_groups = ["${var.master_lb_sg}"]
   subnets         = "${var.master_lb_subnets}"
 
   internal                    = false
@@ -57,6 +56,8 @@ resource "aws_lb" "jenkins_master_lb" {
     Name = "${var.master_lb_name}"
   }
 }
+
+
 
 output "master_lb_dns" {
   value = "${aws_lb.jenkins_master_lb.dns_name}"

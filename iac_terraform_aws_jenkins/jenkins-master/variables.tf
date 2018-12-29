@@ -1,7 +1,13 @@
 variable "instance_type" {
   type        = "string"
   description = "Type of the EC2 instance to be launched"
-  default     = "t2.medium"
+  default     = "t2.micro"
+}
+
+variable "root_block_volume_size" {
+  type="string"
+  default = "8"
+  description = "root volume device space to be associated with the instance"
 }
 
 variable "key_pair_name" {

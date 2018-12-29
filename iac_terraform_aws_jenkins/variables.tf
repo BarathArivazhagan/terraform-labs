@@ -13,6 +13,17 @@ variable "aws_secret_key" {
 
 variable "vpc_id" {}
 
+variable "instance_type" {
+  default = "t2.micro"
+  description = "EC2 instance type to be associated"
+}
+
+variable "root_block_volume_size" {
+  type="string"
+  default = "8"
+  description = "root volume device space to be associated with the instance"
+}
+
 variable "jenkins_sg_name" {}
 
 variable "ami" {

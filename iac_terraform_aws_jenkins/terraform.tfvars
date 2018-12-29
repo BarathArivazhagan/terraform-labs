@@ -8,3 +8,4 @@ elb_ssl_cert = "arn:aws:acm:us-east-1:932250589015:certificate/532a3afb-3232-4b3
 master_elb_name="jenkins-master-elb"
 master_record_name="jenkins-master.barath-devops.com"
 vpc_id = "vpc-b46668cc"
+root_block_volume_size="8"

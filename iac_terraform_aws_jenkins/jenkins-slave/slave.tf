@@ -5,7 +5,7 @@ resource "aws_instance" "jenkins_slave_instance" {
   subnet_id = "${var.subnet_id}"
   root_block_device {
     volume_type = "gp2"
-    volume_size = "8"
+    volume_size = "${var.root_block_volume_size}"
   }
   vpc_security_group_ids = ["${var.security_group_ids}"]
 

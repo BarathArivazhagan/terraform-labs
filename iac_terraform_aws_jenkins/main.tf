@@ -23,7 +23,8 @@ module "jenkins_master" {
   master_elb_sg       = ["${module.jenkins_security_groups.jenkins_sg_id}"]
   master_elb_ssl_cert = "${var.elb_ssl_cert}"
   key_pair_name = "${var.key_pair_name}"
-  ssh_key_private = "${var.ssh_private_key}"
+  instance_type = "${var.instance_type}"
+  root_block_volume_size= "${var.root_block_volume_size}"
 }
 
 module "jenkins_slave" {
@@ -33,6 +34,8 @@ module "jenkins_slave" {
   subnet_id          = "${var.public_subnet_id}"
   security_group_ids = ["${module.jenkins_security_groups.jenkins_sg_id}"]
   key_pair_name = "${var.key_pair_name}"
+  instance_type = "${var.instance_type}"
+  root_block_volume_size= "${var.root_block_volume_size}"
 
 }
 

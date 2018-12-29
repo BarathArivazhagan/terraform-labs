@@ -16,6 +16,13 @@ resource "aws_instance" "jenkins_master_instance" {
   provisioner "file" {
     source      = "./artifacts/jenkins_master_script.sh"
     destination = "/opt/script.sh"
+
+    connection {
+      host        = "${aws_instance.jenkins_master_instance.public_ip}"
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("./artifacts/jenkins.pem")}"
+    }
   }
 }
 

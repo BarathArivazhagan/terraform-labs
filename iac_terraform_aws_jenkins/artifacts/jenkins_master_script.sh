@@ -10,3 +10,5 @@ sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 sudo yum install jenkins -y
 sleep 5
 sudo service jenkins start
+sudo yum install git -y
+

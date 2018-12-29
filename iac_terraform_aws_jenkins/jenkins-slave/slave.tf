@@ -14,9 +14,37 @@ resource "aws_instance" "jenkins_slave_instance" {
   }
 
   key_name = "${var.key_pair_name}"
+  provisioner "file" {
+    source      = "./artifacts/jenkins_slave_script.sh"
+    destination = "/home/ec2-user/script.sh"
+
+    connection {
+      host        = "${aws_instance.jenkins_slave_instance.public_ip}"
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("./artifacts/jenkins.pem")}"
+    }
+  }
 }
 
-output "public_ip" {
+resource "null_resource" "jenkins_slave_remote_provisioner" {
+
+
+  provisioner "remote-exec" {
+    inline = ["sudo chmod +x /home/ec2-user/script.sh","/home/ec2-user/script.sh"]
+
+
+    connection {
+      host        = "${aws_instance.jenkins_slave_instance.public_ip}"
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("./artifacts/jenkins.pem")}"
+    }
+  }
+
+}
+
+output "jenkins_slave_instance_public_ip" {
   value = "${aws_instance.jenkins_slave_instance.public_ip}"
 }
 
@@ -25,7 +53,3 @@ output "jenkins_slave_instance_id" {
 }
 
 
-
-resource "null_resource" "jenkins_slave_remote_exec" {
-
-}

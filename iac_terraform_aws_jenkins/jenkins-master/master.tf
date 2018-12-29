@@ -25,8 +25,14 @@ output "instance_id" {
 
 resource "null_resource" "jenkins_remote_provisioner" {
 
+  provisioner "file" {
+    source      = "artifacts/jenkins_master_script.sh"
+    destination = "/opt/script.sh"
+  }
+
   provisioner "remote-exec" {
-    inline = ["sudo dnf -y install python"]
+    inline = ["chmod +x /opt/script.sh","/opt/script.sh"]
+
 
     connection {
       host        = "${aws_instance.jenkins_master_instance.public_ip}"

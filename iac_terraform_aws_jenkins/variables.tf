@@ -42,9 +42,6 @@ variable "key_pair_name" {
   type = "string"
 }
 
-variable "ssh_private_key"{
-
-}
 
 variable "dns_zone_id" {
   type        = "string"

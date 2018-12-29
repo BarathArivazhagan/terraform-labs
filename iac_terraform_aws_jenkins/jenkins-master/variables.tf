@@ -50,4 +50,3 @@ variable "master_elb_ssl_cert" {
   description = "SSL certificate to be attached to the master ELB"
 }
 
-variable "ssh_key_private" {}

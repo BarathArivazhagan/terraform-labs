@@ -39,7 +39,7 @@ module "jenkins_slave" {
 
 
 module "jenkins_route53" {
-  source = "./route53_elbs"
+  source = "./route53"
 
   hosted_zone_id = "${var.dns_zone_id}"
   master_record_name    = "${var.master_record_name}"

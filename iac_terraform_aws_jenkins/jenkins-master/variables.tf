@@ -30,22 +30,22 @@ variable "security_group_ids" {
   type = "list"
 }
 
-variable "master_elb_name" {
+variable "master_lb_name" {
   type        = "string"
-  description = "ELB name for Jenkins master"
+  description = "LB name for Jenkins master"
 }
 
-variable "master_elb_sg" {
+variable "master_lb_sg" {
   type        = "list"
   description = "Security group to be attached to the master ELB"
 }
 
-variable "master_elb_subnets" {
+variable "master_lb_subnets" {
   type        = "list"
   description = "Subnets to be attached to the ELB"
 }
 
-variable "master_elb_ssl_cert" {
+variable "master_lb_ssl_cert" {
   type        = "string"
   description = "SSL certificate to be attached to the master ELB"
 }

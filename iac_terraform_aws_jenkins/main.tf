@@ -18,10 +18,10 @@ module "jenkins_master" {
   ami                = "${var.ami}"
   public_subnet_id  = "${var.public_subnet_id}"
   security_group_ids = ["${module.jenkins_security_groups.jenkins_sg_id}"]
-  master_elb_name     = "${var.master_elb_name}"
-  master_elb_subnets  = ["${var.public_subnet_id}"]
-  master_elb_sg       = ["${module.jenkins_security_groups.jenkins_sg_id}"]
-  master_elb_ssl_cert = "${var.elb_ssl_cert}"
+  master_lb_name     = "${var.master_lb_name}"
+  master_lb_subnets  = ["${var.public_subnet_id}"]
+  master_lb_sg       = ["${module.jenkins_security_groups.jenkins_sg_id}"]
+  master_lb_ssl_cert = "${var.elb_ssl_cert}"
   key_pair_name = "${var.key_pair_name}"
   instance_type = "${var.instance_type}"
   root_block_volume_size= "${var.root_block_volume_size}"

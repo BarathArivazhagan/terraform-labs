@@ -49,7 +49,7 @@ variable "dns_zone_id" {
   default     = "Z3B1VVYA5I0U01"
 }
 
-variable "master_elb_name" {}
+variable "master_lb_name" {}
 
 variable "elb_ssl_cert" {
   type        = "string"

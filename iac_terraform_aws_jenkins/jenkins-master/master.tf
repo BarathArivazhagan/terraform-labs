@@ -44,18 +44,18 @@ resource "null_resource" "jenkins_remote_provisioner" {
 
 }
 
-resource "aws_elb" "jenkins_master_elb" {
-  name = "${var.master_elb_name}"
-
-  security_groups = ["${var.master_elb_sg}"]
-  subnets         = "${var.master_elb_subnets}"
+resource "aws_lb" "jenkins_master_lb" {
+  name = "${var.master_lb_name}"
+  load_balancer_type = "network"
+  security_groups = ["${var.master_lb_sg}"]
+  subnets         = "${var.master_lb_subnets}"
 
   listener {
     instance_port      = 8080
     instance_protocol  = "http"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = "${var.master_elb_ssl_cert}"
+    ssl_certificate_id = "${var.master_lb_ssl_cert}"
   }
 
   health_check {
@@ -68,20 +68,20 @@ resource "aws_elb" "jenkins_master_elb" {
 
   instances                   = ["${aws_instance.jenkins_master_instance.id}"]
   cross_zone_load_balancing   = true
-  internal                    = true
+  internal                    = false
   idle_timeout                = 400
   connection_draining         = true
   connection_draining_timeout = 400
 
   tags {
-    Name = "${var.master_elb_name}"
+    Name = "${var.master_lb_name}"
   }
 }
 
-output "master_elb_dns" {
-  value = "${aws_elb.jenkins_master_elb.dns_name}"
+output "master_lb_dns" {
+  value = "${aws_lb.jenkins_master_lb.dns_name}"
 }
 
-output "master_elb_zoneid" {
-  value = "${aws_elb.jenkins_master_elb.zone_id}"
+output "master_lb_zoneid" {
+  value = "${aws_lb.jenkins_master_lb.zone_id}"
 }

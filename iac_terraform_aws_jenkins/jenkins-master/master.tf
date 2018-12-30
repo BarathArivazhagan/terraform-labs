@@ -66,8 +66,19 @@ resource "aws_lb" "jenkins_master_lb" {
 
 resource "aws_lb_target_group" "jenkins_lb_target_group" {
   port = 8080
-  protocol = "HTTP"
+  protocol = "TCP"
   vpc_id = "${var.vpc_id}"
+  target_type = "instance"
+
+  tags {
+    Name = "jenkins_lb_target_group"
+  }
+}
+
+resource "aws_lb_target_group_attachment" "jenkins_lb_target_group_attachment" {
+  target_group_arn = "${aws_lb_target_group.jenkins_lb_target_group.arn}"
+  target_id = "${aws_instance.jenkins_master_instance.id}"
+  port = 8080
 }
 
 resource "aws_lb_listener" "jenkins_lb_listener" {

@@ -55,7 +55,6 @@ resource "aws_lb" "jenkins_master_lb" {
   name = "${var.master_lb_name}"
   load_balancer_type = "application"
   subnets         = "${var.master_lb_subnets}"
-
   internal                    = false
 
 
@@ -66,7 +65,7 @@ resource "aws_lb" "jenkins_master_lb" {
 
 resource "aws_lb_target_group" "jenkins_lb_target_group" {
   port = 8080
-  protocol = "HTTTP"
+  protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
   target_type = "instance"
 

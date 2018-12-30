@@ -94,17 +94,7 @@ resource "aws_lb_listener" "jenkins_lb_listener" {
   port = 443
 }
 
-resource "aws_lb_listener_rule" "jenkins_lb_listener_rule" {
-  listener_arn = "${aws_lb_listener.jenkins_lb_listener.arn}"
-  priority     = 100
 
-  action {
-    type             = "forward"
-    target_group_arn = "${aws_lb_target_group.jenkins_lb_target_group.arn}"
-  }
-
-
-}
 
 
 

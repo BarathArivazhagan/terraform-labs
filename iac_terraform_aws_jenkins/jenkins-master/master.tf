@@ -64,6 +64,24 @@ resource "aws_lb" "jenkins_master_lb" {
   }
 }
 
+resource "aws_lb_target_group" "jenkins_lb_target_group" {
+  port = 8080
+  protocol = "HTTP"
+  vpc_id = "${var.vpc_id}"
+}
+
+resource "aws_lb_listener" "jenkins_lb_listener" {
+
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
+  certificate_arn   = "${var.master_lb_ssl_cert}"
+  "default_action" {
+    type = "forward"
+    target_group_arn = "${aws_lb_target_group.jenkins_lb_target_group.arn}"
+  }
+  load_balancer_arn = "${aws_lb.jenkins_master_lb.arn}"
+  port = 443
+}
+
 
 
 output "master_lb_dns" {

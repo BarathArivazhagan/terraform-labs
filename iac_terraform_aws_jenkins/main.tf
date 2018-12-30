@@ -14,7 +14,7 @@ module "jenkins_security_groups" {
 
 module "jenkins_master" {
   source = "./jenkins-master"
-
+  vpc_id            = "${var.vpc_id}"
   ami                = "${var.ami}"
   public_subnet_id  = "${var.public_subnet_id}"
   security_group_ids = ["${module.jenkins_security_groups.jenkins_sg_id}"]

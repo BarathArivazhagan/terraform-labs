@@ -21,6 +21,11 @@ variable "ami" {
   description = "AMI to be used when launching the instances"
 }
 
+variable "vpc_id" {
+  type        = "string"
+  description = "VPC id to be used"
+}
+
 variable "public_subnet_id" {
   type        = "string"
   description = "Subnet in which the EC2 instance should be launched"

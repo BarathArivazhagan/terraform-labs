@@ -69,7 +69,22 @@ resource "aws_lb_target_group" "jenkins_lb_target_group" {
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
   target_type = "instance"
+  name = "jenkins_lb_target_group"
+  stickiness {
+    type            = "lb_cookie"
+    cookie_duration = 1800
+    enabled         = "true"
+  }
+  health_check {
+    healthy_threshold   = 3
+    unhealthy_threshold = 10
+    timeout             = 5
+    interval            = 30
+    path                = "/"
+    port                = 8080
+    matcher             = "200,403"
 
+  }
   tags {
     Name = "jenkins_lb_target_group"
   }
@@ -83,7 +98,7 @@ resource "aws_lb_target_group_attachment" "jenkins_lb_target_group_attachment" {
 
 resource "aws_lb_listener" "jenkins_lb_listener" {
 
-  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = "${var.master_lb_ssl_cert}"
   protocol = "HTTPS"
   "default_action" {

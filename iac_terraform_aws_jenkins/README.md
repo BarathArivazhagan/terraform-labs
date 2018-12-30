@@ -5,7 +5,7 @@ Terraform script to create and configure jenkins master and slave instances in A
 ### Pre-requisites:
 
 * <b> AWS account </b>
-* <b> EC2 instance with an IAM role </b> (EC2FullAccess) attached below terraform commands run from an EC2 instance to avoid security issues related to aws access key and secret
+* <b> EC2 instance with an IAM role </b> (EC2FullAccess,Route53FullAccess) attached below terraform commands run from an EC2 instance to avoid security issues related to aws access key and secret
 * <b> Terraform package to be installed </b>
 * <b> In case of AWS marketplace AMI </b>, accept the license before running the terraform commands
 
@@ -18,7 +18,7 @@ git clone https://github.com/BarathArivazhagan/terraform_scripts.git
 * cd into the repository and run <b>terraform init</b> command
 
 ```
-$ cd terraform_scripts/iac_terraform_aws_ec2_chef_java
+$ cd terraform_scripts/iac_terraform_aws_jenkins
 $ terraform init
 
 ```

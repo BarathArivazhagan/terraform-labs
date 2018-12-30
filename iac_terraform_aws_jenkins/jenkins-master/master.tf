@@ -53,7 +53,7 @@ resource "null_resource" "jenkins_remote_provisioner" {
 
 resource "aws_lb" "jenkins_master_lb" {
   name = "${var.master_lb_name}"
-  load_balancer_type = "network"
+  load_balancer_type = "application"
   subnets         = "${var.master_lb_subnets}"
 
   internal                    = false
@@ -66,7 +66,7 @@ resource "aws_lb" "jenkins_master_lb" {
 
 resource "aws_lb_target_group" "jenkins_lb_target_group" {
   port = 8080
-  protocol = "TCP"
+  protocol = "HTTTP"
   vpc_id = "${var.vpc_id}"
   target_type = "instance"
 
@@ -85,7 +85,7 @@ resource "aws_lb_listener" "jenkins_lb_listener" {
 
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
   certificate_arn   = "${var.master_lb_ssl_cert}"
-  protocol = "TCP"
+  protocol = "HTTPS"
   "default_action" {
     type = "forward"
     target_group_arn = "${aws_lb_target_group.jenkins_lb_target_group.arn}"

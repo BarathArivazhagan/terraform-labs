@@ -8,6 +8,10 @@ Terraform script to create and configure jenkins master and slave instances in A
 * <b> EC2 instance with an IAM role </b> (EC2FullAccess,Route53FullAccess) attached below terraform commands run from an EC2 instance to avoid security issues related to aws access key and secret
 * <b> Terraform package to be installed </b>
 * <b> In case of AWS marketplace AMI </b>, accept the license before running the terraform commands
+* <b> Modify the variables definded in terraform.tfvars</b>
+* <b> Copy private key from key_pair_name specified to artifacts/jenkins.pem </b>
+
+> Note: Private key is required to ssh into instances to download required dependencies and packages.
 
 ### How to run the terraform script?
 

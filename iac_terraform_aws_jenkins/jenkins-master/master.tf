@@ -52,12 +52,12 @@ resource "null_resource" "jenkins_remote_provisioner" {
 }
 
 resource "aws_lb" "jenkins_master_lb" {
-  name = "${var.master_lb_name}"
-  load_balancer_type = "application"
-  security_groups = ["${var.security_group_ids}"]
-  subnets         = "${var.master_lb_subnets}"
-  internal                    = false
-  enable_deletion_protection = true
+  name                         = "${var.master_lb_name}"
+  load_balancer_type           = "application"
+  security_groups              = ["${var.security_group_ids}"]
+  subnets                      = "${var.master_lb_subnets}"
+  internal                     = false
+  enable_deletion_protection   =  false
 
   tags {
     Name = "${var.master_lb_name}"

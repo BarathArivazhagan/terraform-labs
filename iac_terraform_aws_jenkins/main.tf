@@ -19,7 +19,7 @@ module "jenkins_master" {
   public_subnet_id  = "${var.public_subnet_id}"
   security_group_ids = ["${module.jenkins_security_groups.jenkins_sg_id}"]
   master_lb_name     = "${var.master_lb_name}"
-  master_lb_subnets  = ["${var.public_subnet_id}"]
+  master_lb_subnets  = "${var.master_lb_subnets}"
   master_lb_sg       = ["${module.jenkins_security_groups.jenkins_sg_id}"]
   master_lb_ssl_cert = "${var.elb_ssl_cert}"
   key_pair_name = "${var.key_pair_name}"

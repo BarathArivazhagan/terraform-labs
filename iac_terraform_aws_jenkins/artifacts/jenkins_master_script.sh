@@ -9,8 +9,10 @@ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stab
 sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 sudo yum install jenkins -y
 sleep 5
+sudo groupadd docker
+sudo usermod -a -G docker ec2-user
+sudo usermod -a -G docker jenkins
 sudo service jenkins start
-
 sudo systemctl start docker
 
 

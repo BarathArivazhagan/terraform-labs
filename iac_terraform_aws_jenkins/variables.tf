@@ -38,6 +38,12 @@ variable "public_subnet_id" {
   default     = "subnet-36ce867f"
 }
 
+variable "master_lb_subnets" {
+  type        = "list"
+  description = "Subnets to be attached to the ELB"
+}
+
+
 variable "key_pair_name" {
   type = "string"
 }

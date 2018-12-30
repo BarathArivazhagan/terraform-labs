@@ -40,9 +40,13 @@ variable "public_subnet_id" {
 
 variable "master_lb_subnets" {
   type        = "list"
-  description = "Subnets to be attached to the ELB"
+  description = "Subnets to be attached to the ALB"
 }
 
+variable "target_group_name" {
+  type = "string"
+  description = "target group name for jenkins ALB"
+}
 
 variable "key_pair_name" {
   type = "string"

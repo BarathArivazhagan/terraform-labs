@@ -69,7 +69,7 @@ resource "aws_lb_target_group" "jenkins_lb_target_group" {
   protocol = "HTTP"
   vpc_id = "${var.vpc_id}"
   target_type = "instance"
-  name = "jenkins_lb_target_group"
+  name = "${var.target_group_name}"
   stickiness {
     type            = "lb_cookie"
     cookie_duration = 1800
@@ -86,7 +86,7 @@ resource "aws_lb_target_group" "jenkins_lb_target_group" {
 
   }
   tags {
-    Name = "jenkins_lb_target_group"
+    Name = "${var.target_group_name}"
   }
 }
 

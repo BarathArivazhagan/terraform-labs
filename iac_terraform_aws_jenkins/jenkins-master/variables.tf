@@ -55,3 +55,7 @@ variable "master_lb_ssl_cert" {
   description = "SSL certificate to be attached to the master ELB"
 }
 
+variable "target_group_name" {
+  type = "string"
+  description = "target group name for jenkins ALB"
+}

@@ -85,10 +85,7 @@ variable "map_users_count" {
   default     = 0
 }
 
-variable "subnets" {
-  description = "A list of subnets to place the EKS cluster and workers within."
-  type        = "list"
-}
+
 
 variable "tags" {
   description = "A map of tags to add to all resources."

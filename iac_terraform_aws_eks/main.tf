@@ -159,7 +159,7 @@ module "eks" {
   cluster_name                         = "${local.cluster_name}"
   subnets                              = ["${module.vpc.private_subnets}"]
   tags                                 = "${local.tags}"
-  vpc_id                               = "${module.vpc}"
+  vpc_id                               = "${module.vpc.vpc_id}"
   worker_groups                        = "${local.worker_groups}"
   worker_groups_launch_template        = "${local.worker_groups_launch_template}"
   worker_group_count                   = "1"

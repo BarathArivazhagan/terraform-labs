@@ -1,7 +1,7 @@
 
 variable "aws_region" {
   description = "AWS region to launch servers."
-  default     = "us-east-1"
+  default     = "us-east-2"
 }
 
 variable "aws_access_key" {
@@ -17,6 +17,7 @@ variable "aws_secret_key" {
 
 variable "cluster_name" {
   description = "Name of the EKS cluster. Also used as a prefix in names of related resources."
+  default = "demo-k8s"
 }
 
 variable "cluster_security_group_id" {
@@ -93,9 +94,6 @@ variable "tags" {
   default     = {}
 }
 
-variable "vpc_id" {
-  description = "VPC where the cluster and workers will be deployed."
-}
 
 variable "worker_groups" {
   description = "A list of maps defining worker group configurations to be defined using AWS Launch Configurations. See workers_group_defaults for valid keys."

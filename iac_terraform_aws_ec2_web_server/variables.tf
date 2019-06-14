@@ -46,6 +46,6 @@ variable "instance_tags" {
   }
 }
 
-variable "name" {
-  type = "list"
+variable "stack_name" {
+  type = "string"
 }

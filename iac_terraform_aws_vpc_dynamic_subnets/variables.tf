@@ -1,3 +1,5 @@
+
+
 variable "aws_region" {
   description = "AWS region to launch servers."
   default     = "us-east-1"
@@ -16,6 +18,7 @@ variable "aws_secret_key" {
 
 variable "vpc_cidr" {
   description = "vpc cidr block association"
+  default = "10.0.0.0/16"
 }
 
 variable "vpc_name" {
@@ -25,7 +28,7 @@ variable "vpc_name" {
 
 variable "aws_internet_gateway_name" {
 
-  description = "vpc name association"
+  description = "vpc internet gateway association"
   default = "client-internet-gateway"
 }
 
@@ -43,4 +46,10 @@ variable "private_client_aws_route_table" {
 }
 variable "public_client_aws_route_table" {
 
+}
+
+variable "stack_name" {
+
+  description = "stack name to be assoicated with all the resources created using this script"
+  default = "demo"
 }

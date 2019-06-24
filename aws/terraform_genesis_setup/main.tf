@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "terraform_bucket" {
   lifecycle {
     prevent_destroy = true
   }
-  tags {
+  tags = {
     Name = "${var.bucket_name}-s3 remote state store"
   }
 }

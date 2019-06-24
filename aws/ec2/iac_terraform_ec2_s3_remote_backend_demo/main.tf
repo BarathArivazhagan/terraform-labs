@@ -51,6 +51,6 @@ resource "aws_security_group" "default_allow_all_sg" {
   }
 
   tags = {
-    Name = "${var.stack_name}-${aws_instance.ec2-instance.id}-allow_all"
+    Name = "${var.stack_name}-ec2-instance-allow_all"
   }
 }

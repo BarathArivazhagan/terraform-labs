@@ -19,7 +19,7 @@ resource "aws_vpc" "vpc" {
 resource "aws_subnet" "private-subnet-1a" {
 
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${cidrsubnet(${var.vpc_cidr}, 16, 1)}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr}", 16, 0)}"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "false"
   tags = {
@@ -30,7 +30,7 @@ resource "aws_subnet" "private-subnet-1a" {
 resource "aws_subnet" "public-subnet-1a" {
 
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${cidrsubnet(${var.vpc_cidr}, 16, 2)}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr}", 16, 1)}"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "true"
   tags = {
@@ -41,7 +41,7 @@ resource "aws_subnet" "public-subnet-1a" {
 
 resource "aws_internet_gateway" "internet-gateway" {
   vpc_id = "${aws_vpc.vpc.id}"
-  tags {
+  tags = {
     Name = "${var.stack_name}--internet-gateway"
   }
 }

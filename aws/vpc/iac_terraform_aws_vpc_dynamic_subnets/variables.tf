@@ -21,33 +21,6 @@ variable "vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "vpc_name" {
-  description = "vpc name association"
-  default = "client-vpc"
-}
-
-variable "aws_internet_gateway_name" {
-
-  description = "vpc internet gateway association"
-  default = "client-internet-gateway"
-}
-
-
-variable "public_subnet_cidr_a" {
-
-}
-variable "private_subnet_cidr_a" {
-
-}
-
-
-variable "private_client_aws_route_table" {
-
-}
-variable "public_client_aws_route_table" {
-
-}
-
 variable "stack_name" {
 
   description = "stack name to be assoicated with all the resources created using this script"

@@ -1,7 +1,3 @@
 aws_region = "us-east-1"
 stack_name = "barath-demo"
-vpc_cidr = "11.0.0.0/16"
-public_subnet_cidr_a = "11.0.0.0/24"
-private_subnet_cidr_a = "11.0.1.0/24"
-private_client_aws_route_table= "private_client_route_table"
-public_client_aws_route_table = "public_client_route_table"
+vpc_cidr = "10.0.0.0/16"

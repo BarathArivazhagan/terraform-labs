@@ -33,7 +33,7 @@ resource "aws_instance" "ec2-instance" {
 
 # This resource block creates AWS Secutiry Group within VPC ID with the details provided
 resource "aws_security_group" "default_allow_all_sg" {
-  name        = "${var.stack_name}-${aws_instance.ec2-instance.id}-default_allow_all_sg"
+  name        = "${var.stack_name}-ec2-instance-allow-all"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
   ingress {
@@ -51,6 +51,6 @@ resource "aws_security_group" "default_allow_all_sg" {
   }
 
   tags = {
-    Name = "${var.stack_name}-ec2-instance-allow_all"
+    Name = "${var.stack_name}-ec2-instance-allow-all"
   }
 }

@@ -2,11 +2,22 @@ provider "aws" {
   region = "${var.aws_region}"
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
+
+}
+
+terraform {
+  backend "s3" {
+    bucket = "${var.bucket_name}"
+    region = "${var.aws_region}"
+    dynamodb_table = "${var.dynamo_db_table}"
+  }
+
+  required_version = "0.12.2"
 }
 
 
-# This resource block creates AWS EC2 instance with the details provided
-resource "aws_instance" "web-server" {
+# This resource block creates aws ec2 instance
+resource "aws_instance" "ec2-instance" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"

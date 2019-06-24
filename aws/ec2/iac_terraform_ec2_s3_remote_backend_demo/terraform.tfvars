@@ -1,0 +1,7 @@
+aws_region = "us-east-1"
+key_pair_name = "barath_mac_pair"
+instance_type = "t2.micro"
+ami = "ami-0c6b1d09930fac512"
+vpc_id="vpc-b46668cc"
+subnet_id="subnet-8ba2c5d6"
+dynamo_db_table="terraform-state-lock"

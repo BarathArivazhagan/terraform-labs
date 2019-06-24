@@ -37,18 +37,15 @@ variable "instance_type" {
 
 variable "ami" {
   description = "ami to be associated with the instance"
-  default = "ami-97785bed" # use amazon linux ami as default (Amazon Linux AMI 2017.09.1 (HVM), SSD Volume Type)
+  default = "ami-0cc96feef8c6bbff3" # use amazon linux ami as default (Amazon Linux AMI 2017.09.1 (HVM), SSD Volume Type)
 }
 
-variable "instance_tags" {
-  type = "map"
-  default = {
-    Name = "terraform-genesis"
-  }
+variable "bucket_name" {
+  description = "bucket name to be associated with terraform backend remote state"
 }
 
-variable "stack_name" {}
+variable "stack_name" {
+  description = "stack name"
+}
 
-variable "bucket_name" {}
-
-variable "dynamodb_table_name" {}
+variable "dynamo_db_table" {}

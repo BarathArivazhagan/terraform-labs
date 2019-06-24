@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "terraform_bucket" {
 
 # This resource block creates aws dynamoDB table
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name           = "terraform-state-clock"
+  name           = "${var.dynamodb_table_name}"
   read_capacity  = 4
   write_capacity = 4
   hash_key       = "LockID"

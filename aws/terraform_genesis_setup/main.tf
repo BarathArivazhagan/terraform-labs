@@ -6,13 +6,22 @@ provider "aws" {
 
 # This resource block creates aws s3 bucket
 resource "aws_s3_bucket" "terraform_bucket" {
-  bucket = "terraform-state-bucket"
+  bucket = "${var.bucket_name}"
   region = "${var.aws_region}"
+  versioning {
+    enabled = true
+  }
+  lifecycle {
+    prevent_destroy = true
+  }
+  tags {
+    Name = "${var.bucket_name}-s3 remote state store"
+  }
 }
 
 # This resource block creates aws dynamoDB table
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name           = "terraform-lock"
+  name           = "terraform-state-clock"
   read_capacity  = 4
   write_capacity = 4
   hash_key       = "LockID"

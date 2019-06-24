@@ -48,3 +48,5 @@ variable "instance_tags" {
 }
 
 variable "stack_name" {}
+
+variable "bucket_name" {}

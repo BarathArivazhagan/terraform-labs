@@ -103,3 +103,4 @@ resource "aws_route_table_association" "private_subnet_1a_association" {
 output "vpc_id" {
   value = "${aws_vpc.vpc.id}"
 }
+

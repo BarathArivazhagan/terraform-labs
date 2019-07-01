@@ -11,7 +11,7 @@ resource "aws_instance" "web-server" {
   key_name = "${var.key_pair_name}"
   vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
   subnet_id="${var.subnet_id}"
-  tags {
+  tags = {
     Name = "${var.stack_name}-web-server"
   }
 
@@ -19,7 +19,7 @@ resource "aws_instance" "web-server" {
 }
 
 resource "aws_security_group" "default_allow_all_sg" {
-  name        = "default_allow_all_sg"
+  name        = "${var.stack_name}-terraform-demo-all-sg"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
 
@@ -37,7 +37,7 @@ resource "aws_security_group" "default_allow_all_sg" {
     cidr_blocks     = ["0.0.0.0/0"]
   }
 
-  tags {
-    Name = "${var.stack_name}-default_allow_all_sg"
+  tags ={
+    Name = "${var.stack_name}-terraform-demo-all-sg"
   }
 }

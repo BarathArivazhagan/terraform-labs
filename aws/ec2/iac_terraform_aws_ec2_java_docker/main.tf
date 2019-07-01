@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 
-# This resource block creates AWS EC2 instance with the details provided
+# This resource block creates aws ec2 instance with the details provided
 resource "aws_instance" "web-server" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
@@ -25,6 +25,7 @@ resource "aws_security_group" "default_allow_all_sg" {
   name        = "default_allow_all_sg"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
+
   ingress {
     from_port   = 0
     to_port     = 0
@@ -43,3 +44,12 @@ resource "aws_security_group" "default_allow_all_sg" {
     Name = "allow_all"
   }
 }
+
+output "web-server-instance-id" {
+  value = "${aws_instance.web-server.id}"
+}
+
+output "my-instance-subnet-id" {
+  value = "${aws_instance.web-server.subnet_id}"
+}
+

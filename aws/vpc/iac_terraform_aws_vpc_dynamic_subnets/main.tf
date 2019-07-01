@@ -10,8 +10,8 @@ resource "aws_vpc" "vpc" {
   cidr_block = "${var.vpc_cidr}"
   enable_dns_hostnames = true
   enable_dns_support = true
-  tags {
-    Name = "${var.stack_name}-${var.vpc_name}"
+  tags = {
+    Name = "${var.stack_name}-vpc"
   }
 }
 
@@ -19,10 +19,10 @@ resource "aws_vpc" "vpc" {
 resource "aws_subnet" "private-subnet-1a" {
 
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${var.private_subnet_cidr_a}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr}", 16, 0)}"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "false"
-  tags {
+  tags = {
     Name = "${var.stack_name}-private-subnet-1a"
   }
 }
@@ -30,10 +30,10 @@ resource "aws_subnet" "private-subnet-1a" {
 resource "aws_subnet" "public-subnet-1a" {
 
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${var.public_subnet_cidr_a}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr}", 16, 1)}"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "true"
-  tags {
+  tags = {
     Name = "${var.stack_name}-public-subnet-1a"
   }
 }
@@ -41,15 +41,15 @@ resource "aws_subnet" "public-subnet-1a" {
 
 resource "aws_internet_gateway" "internet-gateway" {
   vpc_id = "${aws_vpc.vpc.id}"
-  tags {
-    Name = "${var.stack_name}-${var.aws_internet_gateway_name}"
+  tags = {
+    Name = "${var.stack_name}--internet-gateway"
   }
 }
 
 resource "aws_nat_gateway" "nat-gateway" {
   subnet_id     = "${aws_subnet.public-subnet-1a.id}"
   allocation_id = "${aws_eip.nat-gateway-eip.id}"
-  tags {
+  tags = {
     Name = "${var.stack_name}-nat-gateway"
   }
 }
@@ -67,7 +67,7 @@ resource "aws_route_table" "client-public-route-table" {
     gateway_id = "${aws_internet_gateway.internet-gateway.id}"
   }
 
-  tags {
+  tags = {
     Name = "${var.stack_name}-public-route-table"
   }
 
@@ -81,7 +81,7 @@ resource "aws_route_table" "private-route-table" {
     gateway_id = "${aws_nat_gateway.nat-gateway.id}"
   }
 
-  tags {
+  tags = {
     Name = "${var.stack_name}-private-route-table"
   }
 
@@ -99,3 +99,8 @@ resource "aws_route_table_association" "private_subnet_1a_association" {
   route_table_id = "${aws_route_table.private-route-table.id}"
 
 }
+
+output "vpc_id" {
+  value = "${aws_vpc.vpc.id}"
+}
+

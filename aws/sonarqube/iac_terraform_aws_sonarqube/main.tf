@@ -8,7 +8,7 @@ provider "aws" {
 
 
 resource "aws_db_instance" "sonarqube-db" {
-  name = "${var.sonar_database_name}"
+  name = "${var.stack_name}-${var.sonar_database_name}"
   instance_class = "db.t2.micro"
   identifier = "${var.sonar_database_name}"
   vpc_security_group_ids = ["${aws_security_group.rds_sonarqube_security_group.id}"]
@@ -31,7 +31,7 @@ output "sonarqube_db_rds_endpoint" {
 
 resource "aws_security_group" "rds_sonarqube_security_group" {
 
-  name        = "${var.rds_db_security_group_name}"
+  name        = "${var.stack_name}-${var.rds_db_security_group_name}"
   description = "RDS security group for mysql database engine"
   vpc_id = "${var.vpc_id}"
   ingress {
@@ -48,15 +48,15 @@ resource "aws_security_group" "rds_sonarqube_security_group" {
     cidr_blocks     = ["0.0.0.0/0"]
   }
 
-  tags {
-    Name = "${var.rds_db_security_group_name}"
+  tags = {
+    Name = "${var.stack_name}-${var.rds_db_security_group_name}"
   }
 
 
 }
 
 
-# This resource block creates AWS EC2 instance with the details provided
+# This resource block creates aws ec2 instance
 resource "aws_instance" "sonarqube-instance" {
 
   ami = "${var.ami}"
@@ -64,8 +64,8 @@ resource "aws_instance" "sonarqube-instance" {
   key_name = "${var.key_pair_name}"
   vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
   subnet_id = "${var.subnet_id}"
-  tags {
-    Name = "sonarqube-instance"
+  tags = {
+    Name = "${var.stack_name}-sonarqube"
   }
 
   depends_on = ["aws_db_instance.sonarqube-db"]
@@ -106,7 +106,7 @@ resource "aws_security_group" "default_allow_all_sg" {
     cidr_blocks     = ["0.0.0.0/0"]
   }
 
-  tags {
-    Name = "allow_all"
+  tags = {
+    Name = "${var.stack_name}-allow_all"
   }
 }

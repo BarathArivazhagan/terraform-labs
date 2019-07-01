@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 
-# This resource block creates AWS EC2 instance with the details provided
+# This resource block creates aws ec2 instance with the details provided
 resource "aws_instance" "ec2-instance" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"

@@ -26,7 +26,7 @@ resource "aws_subnet" "private_subnets" {
 
   count = "${local.subnets > 0 ? local.subnets : 1}"
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 8, "${count.index + 1}")}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 8, "${count.index}")}"
   availability_zone = "${var.availability_zones[var.aws_region][count.index]}"
   map_public_ip_on_launch = "false"
   tags = {

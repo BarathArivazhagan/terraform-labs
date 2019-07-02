@@ -23,7 +23,7 @@ resource "aws_subnet" "private_subnet_1" {
   availability_zone = "${var.availability_zones[var.aws_region][0]}"
   map_public_ip_on_launch = "false"
   tags = {
-    Name = "${var.stack_name}-private-subnet"
+    Name = "${var.stack_name}-private-subnet-${var.availability_zones[var.aws_region][0]}"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "private_subnet_2" {
   availability_zone = "${var.availability_zones[var.aws_region][1]}"
   map_public_ip_on_launch = "false"
   tags = {
-    Name = "${var.stack_name}-private-subnet"
+    Name = "${var.stack_name}-private-subnet-${var.availability_zones[var.aws_region][1]}"
   }
 }
 
@@ -45,7 +45,7 @@ resource "aws_subnet" "public_subnet_1" {
   availability_zone = "${var.availability_zones[var.aws_region][0]}"
   map_public_ip_on_launch = "true"
   tags = {
-    Name = "${var.stack_name}-public-subnet"
+    Name = "${var.stack_name}-public-subnet-${var.availability_zones[var.aws_region][0]}"
   }
 }
 
@@ -56,27 +56,27 @@ resource "aws_subnet" "public_subnet_2" {
   availability_zone = "${var.availability_zones[var.aws_region][1]}"
   map_public_ip_on_launch = "true"
   tags = {
-    Name = "${var.stack_name}-public-subnet"
+    Name = "${var.stack_name}-public-subnet-${var.availability_zones[var.aws_region][1]}"
   }
 }
 
 
-resource "aws_internet_gateway" "internet-gateway" {
+resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = "${aws_vpc.vpc.id}"
   tags = {
     Name = "${var.stack_name}-internet-gateway"
   }
 }
 
-resource "aws_nat_gateway" "nat-gateway" {
+resource "aws_nat_gateway" "nat_gateway" {
   subnet_id     = "${aws_subnet.public_subnet_1.id}"
-  allocation_id = "${aws_eip.nat-gateway-eip.id}"
+  allocation_id = "${aws_eip.nat_gateway_eip.id}"
   tags = {
     Name = "${var.stack_name}-nat-gateway"
   }
 }
 
-resource "aws_eip" "nat-gateway-eip" {
+resource "aws_eip" "nat_gateway_eip" {
   vpc      = true
 }
 
@@ -86,7 +86,7 @@ resource "aws_route_table" "public_route_table" {
   vpc_id = "${aws_vpc.vpc.id}"
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.internet-gateway.id}"
+    gateway_id = "${aws_internet_gateway.internet_gateway.id}"
   }
 
   tags = {
@@ -100,7 +100,7 @@ resource "aws_route_table" "private_route_table" {
   vpc_id = "${aws_vpc.vpc.id}"
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_nat_gateway.nat-gateway.id}"
+    gateway_id = "${aws_nat_gateway.nat_gateway.id}"
   }
 
   tags = {

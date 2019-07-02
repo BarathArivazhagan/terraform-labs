@@ -18,9 +18,9 @@ resource "aws_vpc" "vpc" {
 
 resource "aws_subnet" "private_subnets" {
 
-  count = "${var.subnets ? var.subnets : 1}"
+  count = "${tonumber("${var.subnets}") > 0 ? tonumber("${var.subnets}") : 1}"
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 16, ${count.index})}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 16, "${count.index}")}"
   availability_zone = "${var.availability_zones[var.aws_region][count.index]}"
   map_public_ip_on_launch = "false"
   tags = {
@@ -30,9 +30,9 @@ resource "aws_subnet" "private_subnets" {
 
 resource "aws_subnet" "public_subnets" {
 
-  count = "${var.subnets ? var.subnets : 1}"
+  count = "${tonumber("${var.subnets}") > 0 ? tonumber("${var.subnets}") : 1}"
   vpc_id = "${aws_vpc.vpc.id}"
-  cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 16, ${count.index}+${var.subnets})}"
+  cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 16, "${count.index}+${var.subnets}")}"
   availability_zone = "${var.availability_zones[var.aws_region][count.index]}"
   map_public_ip_on_launch = "true"
   tags = {

@@ -20,7 +20,7 @@ resource "aws_subnet" "private_subnet_1" {
 
   vpc_id = "${aws_vpc.vpc.id}"
   cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 8, 0)}"
-  availability_zone = "${lookup(var.availability_zones,var.aws_region)[0]}"
+  availability_zone = "${var.availability_zones[var.aws_region][0]}"
   map_public_ip_on_launch = "false"
   tags = {
     Name = "${var.stack_name}-private-subnet"
@@ -31,7 +31,7 @@ resource "aws_subnet" "private_subnet_2" {
 
   vpc_id = "${aws_vpc.vpc.id}"
   cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 8, 1)}"
-  availability_zone = "${lookup(var.availability_zones,var.aws_region)[1]}"
+  availability_zone = "${var.availability_zones[var.aws_region][1]}"
   map_public_ip_on_launch = "false"
   tags = {
     Name = "${var.stack_name}-private-subnet"
@@ -42,7 +42,7 @@ resource "aws_subnet" "public_subnet_1" {
 
   vpc_id = "${aws_vpc.vpc.id}"
   cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 8, 2)}"
-  availability_zone = "${lookup(var.availability_zones,var.aws_region)[0]}"
+  availability_zone = "${var.availability_zones[var.aws_region][0]}"
   map_public_ip_on_launch = "true"
   tags = {
     Name = "${var.stack_name}-public-subnet"
@@ -53,7 +53,7 @@ resource "aws_subnet" "public_subnet_2" {
 
   vpc_id = "${aws_vpc.vpc.id}"
   cidr_block = "${cidrsubnet("${var.vpc_cidr_block}", 8, 3)}"
-  availability_zone = "${lookup(var.availability_zones,var.aws_region)[1]}"
+  availability_zone = "${var.availability_zones[var.aws_region][1]}"
   map_public_ip_on_launch = "true"
   tags = {
     Name = "${var.stack_name}-public-subnet"

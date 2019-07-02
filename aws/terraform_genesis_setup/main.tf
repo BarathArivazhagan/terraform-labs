@@ -33,11 +33,11 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
 
 
 # This resource block creates aws ec2 instance
-resource "aws_instance" "terraform-genesis" {
+resource "aws_instance" "terraform_genesis" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"
-  vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.terraform_genesis_security_group.id}"]
   subnet_id = "${var.subnet_id}"
   user_data = "${file("user_data")}"
   tags = {
@@ -47,9 +47,9 @@ resource "aws_instance" "terraform-genesis" {
 
 }
 
-# This resource block creates aws Secutiry Group within VPC ID with the details provided
-resource "aws_security_group" "default_allow_all_sg" {
-  name        = "${var.stack_name}_terraform_allow_all"
+# This resource block creates aws security group within VPC ID with the details provided
+resource "aws_security_group" "terraform_genesis_security_group" {
+  name        = "${var.stack_name}_terraform_sg"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
   ingress {
@@ -67,6 +67,6 @@ resource "aws_security_group" "default_allow_all_sg" {
   }
 
   tags = {
-    Name = "${var.stack_name}_terraform_allow_all"
+    Name = "${var.stack_name}_terraform_sg"
   }
 }

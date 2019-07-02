@@ -14,15 +14,15 @@ resource "aws_instance" "web-server" {
   subnet_id = "${var.subnet_id}"
   user_data = "${file("user_data")}"
   tags = {
-    Name = "ec2-docker-java"
+    Name = "${var.stack_name}-ec2-docker-java"
   }
-
 
 }
 
+
 # This resource block creates AWS Secutiry Group within VPC ID with the details provided
-resource "aws_security_group" "default_allow_all_sg" {
-  name        = "default_allow_all_sg"
+resource "aws_security_group" "web_security_group" {
+  name        = "${var.stack_name}_web_sg"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
 
@@ -47,9 +47,5 @@ resource "aws_security_group" "default_allow_all_sg" {
 
 output "web-server-instance-id" {
   value = "${aws_instance.web-server.id}"
-}
-
-output "my-instance-subnet-id" {
-  value = "${aws_instance.web-server.subnet_id}"
 }
 

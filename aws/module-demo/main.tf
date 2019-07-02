@@ -4,7 +4,7 @@ provider "aws" {
   secret_key = "${var.aws_secret_key}"
 }
 
-
+# ec2 module containing ec2 related resources
 module "ec2_module" {
 
   source = "./ec2"
@@ -16,6 +16,7 @@ module "ec2_module" {
 
 }
 
+# vpc module containing vpc related resources
 module "vpc_module" {
   source = "./vpc"
   cidr_block = "11.0.0.0.0/16"

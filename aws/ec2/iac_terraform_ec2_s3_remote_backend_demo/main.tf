@@ -21,7 +21,7 @@ resource "aws_instance" "ec2-instance" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"
-  vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.security_group.id}"]
   subnet_id = "${var.subnet_id}"
   user_data = "${file("user_data")}"
   tags = {
@@ -32,8 +32,8 @@ resource "aws_instance" "ec2-instance" {
 }
 
 # This resource block creates AWS Secutiry Group within VPC ID with the details provided
-resource "aws_security_group" "default_allow_all_sg" {
-  name        = "${var.stack_name}-ec2-instance-allow-all"
+resource "aws_security_group" "security_group" {
+  name        = "${var.stack_name}-ec2-security-group"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
   ingress {
@@ -51,6 +51,6 @@ resource "aws_security_group" "default_allow_all_sg" {
   }
 
   tags = {
-    Name = "${var.stack_name}-ec2-instance-allow-all"
+    Name = "${var.stack_name}-ec2-security-group"
   }
 }

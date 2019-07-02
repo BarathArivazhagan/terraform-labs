@@ -15,8 +15,9 @@ variable "aws_secret_key" {
   default = "" # Not recommended to use secret key as it leads to security issues
 }
 
-variable "vpc_id" {
-  description = "vpc id to be associated"
+variable "vpc_id"{
+  description = "AWS VPC ID to be associated with the instance"
+  default = ""
 }
 
 variable "subnet_id" {
@@ -24,22 +25,42 @@ variable "subnet_id" {
   default = ""
 }
 
-variable "key_pair_name"{
-  description = "key pair to be associated with the instance"
-}
 
-variable "instance_type" {
+variable "data" {
 
   description = "instance_type to be associated with the instance"
   default = "t2.micro" # use t2 micro free tier as default instance type
 }
 
-variable "ami" {
-  description = "ami to be associated with the instance"
 
+variable "database_name" {
+  description = "RDS database name"
 }
 
-variable "stack_name" {
-  description = "stack name to be associated with the resources"
+variable "database_port" {
+  type = string
+  default = 3306
 }
 
+variable "database_master_username" {
+  description = "RDS user name "
+}
+
+variable "database_master_password" {
+  description = "RDS user password "
+}
+
+variable "db_engine" {
+  default = "mysql"
+}
+
+variable "db_instance_class" {
+  default = "db.t2.micro"
+}
+variable "db_allocated_storage" {}
+
+variable "db_subnet_group_name" {}
+
+variable "db_engine_version" {}
+
+variable "stack_name" {}

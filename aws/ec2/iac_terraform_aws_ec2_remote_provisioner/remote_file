@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir /test
+mkdir /test2
+mkdir /test3

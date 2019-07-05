@@ -6,7 +6,7 @@ resource "aws_instance" "web-server" {
   vpc_security_group_ids = ["${var.sg_id}"]
   subnet_id = "${var.subnet_id}"
   tags = {
-    Name = "demo-ec2-instance"
+    Name = "${var.stack_name}-ec2-instance"
   }
 
 

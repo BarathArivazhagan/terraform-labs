@@ -1,0 +1,10 @@
+aws_region = "us-east-1"
+key_pair_name = "barath_mac_pair"
+instance_type = "t2.micro"
+ami = "ami-0c6b1d09930fac512"
+subnet_id=""
+stack_name="demo-file-provisioner"
+destionation_file_path="/home/ec2-user/" # change it as per AMI
+ssh_type="ssh" # change it to RDP incase of windows
+ssh_user="ec2-user"
+ssh_private_key="private_key.pem"

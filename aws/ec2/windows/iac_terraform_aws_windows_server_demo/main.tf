@@ -36,7 +36,7 @@ resource "aws_security_group" "windows_server_security_group" {
     cidr_blocks     = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "${var.stack_name}-windows-security-group"
   }
 }

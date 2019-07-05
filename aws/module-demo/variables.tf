@@ -21,3 +21,7 @@ variable "instance_type" {}
 variable "key_pair_name" {}
 variable "sg_id" {}
 variable "subnet_id" {}
+variable "vpc_cidr_block" {}
+
+variable "stack_name" {}
+

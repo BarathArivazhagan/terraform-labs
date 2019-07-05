@@ -13,11 +13,13 @@ module "ec2_module" {
   key_pair_name = "${var.key_pair_name}"
   sg_id = "${var.sg_id}"
   subnet_id = "${var.subnet_id}"
+  stack_name = "${var.stack_name}"
 
 }
 
 # vpc module containing vpc related resources
 module "vpc_module" {
   source = "./vpc"
-  cidr_block = "11.0.0.0.0/16"
+  vpc_cidr_block = "${var.vpc_cidr_block}"
+  stack_name = "${var.stack_name}"
 }

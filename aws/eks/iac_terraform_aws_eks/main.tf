@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.11.8"
+  required_version = ">= 0.12.0"
 }
 
 provider "aws" {
@@ -7,9 +7,6 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
-provider "random" {
-  version = "= 1.3.1"
-}
 
 data "aws_availability_zones" "available" {}
 

@@ -1,5 +1,4 @@
 
-
 variable "aws_region" {
   description = "AWS region to launch servers."
   default     = "us-east-1"
@@ -21,16 +20,6 @@ variable "vpc_cidr_block" {
   default = "10.0.0.0/16"
 }
 
-variable "stack_name" {
-
-  description = "stack name to be assoicated with all the resources created using this script"
-  default = "demo"
-}
-
-variable "subnets" {
-  type = "string"
-}
-
 variable "availability_zones" {
   type = "map"
   default = {
@@ -39,4 +28,10 @@ variable "availability_zones" {
     us-west-1 = ["us-west-1a","us-west-1b"]
     us-west-2 = ["us-west-1a","us-west-2b"]
   }
+}
+
+variable "stack_name" {
+
+  description = "stack name to be assoicated with all the resources created using this script"
+  default = "demo"
 }

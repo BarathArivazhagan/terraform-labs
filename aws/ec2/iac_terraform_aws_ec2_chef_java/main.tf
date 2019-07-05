@@ -6,11 +6,11 @@ provider "aws" {
 
 
 # This resource block creates AWS EC2 instance with the details provided
-resource "aws_instance" "web-server" {
+resource "aws_instance" "web_server" {
   ami = "${var.ami}"
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"
-  vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
   subnet_id = "${var.subnet_id}"
   tags {
     Name = "web-server"
@@ -34,8 +34,8 @@ resource "aws_instance" "web-server" {
 }
 
 # This resource block creates AWS Secutiry Group within VPC ID with the details provided
-resource "aws_security_group" "default_allow_all_sg" {
-  name        = "default_allow_all_sg"
+resource "aws_security_group" "web_server_sg" {
+  name        = "${var.stack_name}-web-server-sg"
   description = "Allow all inbound traffic"
   vpc_id = "${var.vpc_id}"
   ingress {
@@ -53,6 +53,6 @@ resource "aws_security_group" "default_allow_all_sg" {
   }
 
   tags {
-    Name = "allow_all"
+    Name = "${var.stack_name}-web-server-sg"
   }
 }

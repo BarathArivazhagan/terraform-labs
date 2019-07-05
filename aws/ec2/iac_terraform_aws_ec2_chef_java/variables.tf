@@ -77,3 +77,7 @@ variable "chef_environment" {
 variable "ssh_connection_user" {
   description = "ssh connection user name to login to the chef node/chef client instance"
 }
+
+variable "stack_name" {
+
+}

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+yum update -y
+yum install -y docker
+systemctl start docker
+docker run -d --name nginx -p 80:80 nginx
+docker run -d --name nginx1 -p 8080:80 nginx
+

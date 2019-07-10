@@ -6,4 +6,4 @@ cd /opt
 wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
 unzip /opt/terraform_0.12.2_linux_amd64.zip
 mv /opt/terraform /usr/local/bin/
-PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/bin/

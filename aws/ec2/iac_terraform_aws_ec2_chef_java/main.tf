@@ -4,7 +4,6 @@ provider "aws" {
   secret_key = "${var.aws_secret_key}"
 }
 
-
 # This resource block creates AWS EC2 instance with the details provided
 resource "aws_instance" "web_server" {
   ami = "${var.ami}"

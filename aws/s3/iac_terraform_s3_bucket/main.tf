@@ -7,6 +7,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket = "${var.bucket_name}"
+  count = 2
+  bucket = "${var.bucket_name}-${count.index}"
   region = "${var.aws_region}"
 }

@@ -7,12 +7,14 @@ provider "aws" {
 
 # This resource block creates aws ec2 instance with the details provided
 resource "aws_instance" "web-server" {
-  ami = "${var.ami}"
+
+  ami = "${var.ami}" # variable reference
   instance_type = "${var.instance_type}"
   key_name = "${var.key_pair_name}"
-  vpc_security_group_ids = ["${aws_security_group.default_allow_all_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.web_security_group.id}"] # resource reference resource_type.resource_name.output_attritube
   subnet_id = "${var.subnet_id}"
   user_data = "${file("user_data")}"
+
   tags = {
     Name = "${var.stack_name}-ec2-docker-java"
   }
@@ -28,20 +30,20 @@ resource "aws_security_group" "web_security_group" {
 
   ingress {
     from_port   = 0
-    to_port     = 0
+    to_port     = 65535
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
     from_port       = 0
-    to_port         = 0
+    to_port         = 65535
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name = "allow_all"
+    Name = "${var.stack_name}-allow_all"
   }
 }
 

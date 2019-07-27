@@ -1,6 +1,0 @@
-#!/bin/bash
-
-yum update -y
-yum install -y git java-1.8.0-openjdk-devel docker
-systemctl start docker
-

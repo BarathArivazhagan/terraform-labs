@@ -1,0 +1,6 @@
+#!/bin/bash
+
+yum update -y
+sudo amazon-linux-extras install ansible2
+yum install -y ansible
+

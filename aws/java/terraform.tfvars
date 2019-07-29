@@ -1,5 +1,0 @@
-aws_region = "us-east-2"
-key_name = "barath_mac_pair_ohio"
-subnet_id = "subnet-df0e3c92"
-sg_id = "sg-0b3261fe277cb4715"
-ami = "ami-0d8f6eb4f641ef691"

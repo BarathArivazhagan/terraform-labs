@@ -95,7 +95,7 @@ resource "aws_route_table_association" "public_subnets_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
-resource "aws_route_table_association" "private_subnet_1a_association" {
+resource "aws_route_table_association" "private_subnets_association" {
 
   count = var.subnets > 0 ? var.subnets : 1
   subnet_id = aws_subnet.private_subnets[count.index].id

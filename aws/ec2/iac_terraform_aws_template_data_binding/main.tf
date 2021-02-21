@@ -8,7 +8,7 @@ provider "aws" {
 data "template_file" "docker_build_template" {
   template = "${var.template_source_path}"
 
-  vars {
+  vars = {
     ecr_repository_url = "${var.docker_repository_url}"
     ecr_repository_name = "${var.docker_repository_name}"
   }

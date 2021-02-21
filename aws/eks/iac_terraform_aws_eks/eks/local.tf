@@ -1,17 +1,17 @@
 locals {
-  asg_tags = ["${null_resource.tags_as_list_of_maps.*.triggers}"]
+  asg_tags = [null_resource.tags_as_list_of_maps.*.triggers]
 
   # Followed recommendation http://67bricks.com/blog/?p=85
   # to workaround terraform not supporting short circut evaluation
-  cluster_security_group_id = "${coalesce(join("", aws_security_group.cluster.*.id), var.cluster_security_group_id)}"
+  cluster_security_group_id = coalesce(join("", aws_security_group.cluster_security_group.*.id), var.cluster_security_group_id)
 
-  worker_security_group_id = "${coalesce(join("", aws_security_group.workers.*.id), var.worker_security_group_id)}"
-  default_iam_role_id      = "${element(concat(aws_iam_role.workers.*.id, list("")), 0)}"
-  kubeconfig_name          = "${var.kubeconfig_name == "" ? "eks_${var.cluster_name}" : var.kubeconfig_name}"
+  worker_security_group_id = coalesce(join("", aws_security_group.workers.*.id), var.worker_security_group_id)
+  default_iam_role_id      = element(concat(aws_iam_role.workers.*.id, list("")), 0)
+  kubeconfig_name          = var.kubeconfig_name == "" ? "eks_${var.cluster_name}" : var.kubeconfig_name
 
   workers_group_defaults_defaults = {
     name                          = "count.index"                   # Name of the worker group. Literal count.index will never be used but if name is not set, the count.index interpolation will be used.
-    ami_id                        = "${data.aws_ami.eks_worker.id}" # AMI ID for the eks workers. If none is provided, Terraform will search for the latest version of their EKS optimized worker AMI.
+    ami_id                        = data.aws_ami.eks_worker.id # AMI ID for the eks workers. If none is provided, Terraform will search for the latest version of their EKS optimized worker AMI.
     asg_desired_capacity          = "1"                             # Desired worker capacity in the autoscaling group.
     asg_max_size                  = "3"                             # Maximum worker capacity in the autoscaling group.
     asg_min_size                  = "1"                             # Minimum worker capacity in the autoscaling group.
@@ -30,23 +30,23 @@ locals {
     enable_monitoring             = true                            # Enables/disables detailed monitoring.
     public_ip                     = false                           # Associate a public ip address with a worker
     kubelet_extra_args            = ""                              # This string is passed directly to kubelet if set. Useful for adding labels or taints.
-    subnets                       = "${join(",", var.subnets)}"     # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
+    subnets                       = join(",", var.subnets)     # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
     autoscaling_enabled           = false                           # Sets whether policy and matching tags will be added to allow autoscaling.
     additional_security_group_ids = ""                              # A comma delimited list of additional security group ids to include in worker launch config
     protect_from_scale_in         = false                           # Prevent AWS from scaling in, so that cluster-autoscaler is solely responsible.
-    iam_role_id                   = "${local.default_iam_role_id}"  # Use the specified IAM role if set.
+    iam_role_id                   = local.default_iam_role_id  # Use the specified IAM role if set.
     suspended_processes           = ""                              # A comma delimited string of processes to to suspend. i.e. AZRebalance,HealthCheck,ReplaceUnhealthy
     target_group_arns             = ""                              # A comma delimited list of ALB target group ARNs to be associated to the ASG
     enabled_metrics               = ""                              # A comma delimited list of metrics to be collected i.e. GroupMinSize,GroupMaxSize,GroupDesiredCapacity
     placement_group               = ""                              # The name of the placement group into which to launch the instances, if any.
   }
 
-  workers_group_defaults = "${merge(local.workers_group_defaults_defaults, var.workers_group_defaults)}"
+  workers_group_defaults = merge(local.workers_group_defaults_defaults, var.workers_group_defaults)
 
   workers_group_launch_template_defaults_defaults = {
     name                                     = "count.index"                                 # Name of the worker group. Literal count.index will never be used but if name is not set, the count.index interpolation will be used.
-    ami_id                                   = "${data.aws_ami.eks_worker.id}"               # AMI ID for the eks workers. If none is provided, Terraform will search for the latest version of their EKS optimized worker AMI.
-    root_block_device_id                     = "${data.aws_ami.eks_worker.root_device_name}" # Root device name for workers. If non is provided, will assume default AMI was used.
+    ami_id                                   = data.aws_ami.eks_worker.id               # AMI ID for the eks workers. If none is provided, Terraform will search for the latest version of their EKS optimized worker AMI.
+    root_block_device_id                     = data.aws_ami.eks_worker.root_device_name # Root device name for workers. If non is provided, will assume default AMI was used.
     asg_desired_capacity                     = "1"                                           # Desired worker capacity in the autoscaling group.
     asg_max_size                             = "3"                                           # Maximum worker capacity in the autoscaling group.
     asg_min_size                             = "1"                                           # Minimum worker capacity in the autoscaling group.
@@ -74,17 +74,17 @@ locals {
     enable_monitoring                        = true                                          # Enables/disables detailed monitoring.
     public_ip                                = false                                         # Associate a public ip address with a worker
     kubelet_extra_args                       = ""                                            # This string is passed directly to kubelet if set. Useful for adding labels or taints.
-    subnets                                  = "${join(",", var.subnets)}"                   # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
+    subnets                                  = join(",", var.subnets)                   # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
     autoscaling_enabled                      = false                                         # Sets whether policy and matching tags will be added to allow autoscaling.
     additional_security_group_ids            = ""                                            # A comma delimited list of additional security group ids to include in worker launch config
     protect_from_scale_in                    = false                                         # Prevent AWS from scaling in, so that cluster-autoscaler is solely responsible.
-    iam_role_id                              = "${local.default_iam_role_id}"                # Use the specified IAM role if set.
+    iam_role_id                              = local.default_iam_role_id                # Use the specified IAM role if set.
     suspended_processes                      = ""                                            # A comma delimited string of processes to to suspend. i.e. AZRebalance,HealthCheck,ReplaceUnhealthy
     target_group_arns                        = ""                                            # A comma delimited list of ALB target group ARNs to be associated to the ASG
     enabled_metrics                          = ""                                            # A comma delimited list of metrics to be collected i.e. GroupMinSize,GroupMaxSize,GroupDesiredCapacity
   }
 
-  workers_group_launch_template_defaults = "${merge(local.workers_group_launch_template_defaults_defaults, var.workers_group_launch_template_defaults)}"
+  workers_group_launch_template_defaults = merge(local.workers_group_launch_template_defaults_defaults, var.workers_group_launch_template_defaults)
 
   ebs_optimized = {
     "c1.medium"    = false
